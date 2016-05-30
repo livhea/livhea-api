@@ -1,0 +1,22 @@
+<section>
+  <div class="page-header">
+    <h1>User groups</h1>
+  </div>
+  <div class="list-group">
+    <a data-ng-repeat="user-group in vm.userGroups"
+       data-ui-sref="userGroups.view({ user-groupId: user-group._id })"
+       class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span data-ng-bind="userGroup.created | date:'mediumDate'"></span>
+        by
+        <span data-ng-if="userGroup.user" data-ng-bind="userGroup.user.displayName"></span>
+        <span data-ng-if="!userGroup.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" data-ng-bind="user-group.name"></h4>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" data-ng-if="vm.userGroups.$resolved && !vm.userGroups.length">
+    No User groups yet, why don't you <a data-ui-sref="userGroups.create">create one</a>?
+  </div>
+</section>

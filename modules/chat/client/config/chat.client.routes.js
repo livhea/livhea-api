@@ -8,7 +8,14 @@ angular.module('chat').config(['$stateProvider',
         url: '/chat',
         templateUrl: 'modules/chat/client/views/chat.client.view.html',
         data: {
-          roles: ['user', 'admin']
+          roles: ['user','coach','admin']
+        }
+      })
+      .state('privateChat', {
+        url: '/chat/:conversationId',
+        templateUrl: 'modules/chat/client/views/private-chat.client.view.html',
+        data: {
+          roles: ['user','coach','admin']
         }
       });
   }
