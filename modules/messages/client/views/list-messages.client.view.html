@@ -1,0 +1,22 @@
+<section>
+  <div class="page-header">
+    <h1>Messages</h1>
+  </div>
+  <div class="list-group">
+    <a data-ng-repeat="message in vm.messages"
+       data-ui-sref="messages.view({ messageId: message._id })"
+       class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span data-ng-bind="message.created | date:'mediumDate'"></span>
+        by
+        <span data-ng-if="message.user" data-ng-bind="message.user.displayName"></span>
+        <span data-ng-if="!message.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" data-ng-bind="message.name"></h4>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" data-ng-if="vm.messages.$resolved && !vm.messages.length">
+    No Messages yet, why don't you <a data-ui-sref="messages.create">create one</a>?
+  </div>
+</section>

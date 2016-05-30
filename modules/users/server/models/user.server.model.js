@@ -97,7 +97,11 @@ var UserSchema = new Schema({
   },
   resetPasswordExpires: {
     type: Date
-  }
+  },
+  assignedCoaches: [{
+    type: Schema.ObjectId,
+    ref: 'User'
+  }]
 });
 
 /**
@@ -108,6 +112,8 @@ UserSchema.pre('save', function (next) {
     this.salt = crypto.randomBytes(16).toString('base64');
     this.password = this.hashPassword(this.password);
   }
+
+  //TODO: Assign a coach automatically
 
   next();
 });
