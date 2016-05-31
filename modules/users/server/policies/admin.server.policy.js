@@ -21,6 +21,12 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/users/:userId',
       permissions: '*'
     }]
+  },{
+    roles: ['coach'],
+    allows: [{
+      resources: '/api/users',
+      permissions: '*'
+    }]
   }]);
 };
 

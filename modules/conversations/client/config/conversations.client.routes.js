@@ -16,6 +16,13 @@ angular.module('conversations').config(['$stateProvider',
         data: {
           roles: ['coach', 'admin']
         }
+      })
+      .state('conversations.users', {
+        url: '/users',
+        templateUrl: 'modules/conversations/client/views/list-users.client.view.html',
+        data: {
+          roles: ['coach', 'admin']
+        }
       });
   }
 ]);

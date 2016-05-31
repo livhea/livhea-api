@@ -4,9 +4,9 @@
 * Module dependencies.
 */
 var path = require('path'),
-mongoose = require('mongoose'),
-Message = mongoose.model('Message'),
-errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
+  mongoose = require('mongoose'),
+  Message = mongoose.model('Message'),
+  errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 
 /**
@@ -22,7 +22,7 @@ exports.read = function (req, res) {
 */
 exports.list = function (req, res) {
 
-  var conversationId = req.query.conversationId;
+  var conversationId = req.query._id;
 
   //TODO:Check if conversationId is recieved in query
   //If yes, then return the list of messages for that conversation
@@ -30,31 +30,47 @@ exports.list = function (req, res) {
   //Ideally, the grouped list is only meant for 'coach' or 'admin' user
   //For a normal 'user' it should only fetch a given conversation
 
-  Message.aggregate([
-    { $match: { $or: [ { toUser: req.user._id },{ fromUser: req.user._id } ] } },
-    {
-      $group: {
-        _id: '$conversationId',
-        messages: { $push : "$$ROOT" },
-        fromUser: {"$first": "$fromUser"},
-        created: {"$last": "$created"}
+  if(conversationId){
+    Message.find({ 'conversationId': conversationId }).sort('-created').exec(function(err, messages){
+      if(err){
+        console.log(err);
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      }else{
+        var User = mongoose.model('User');
+        User.populate(messages, { path: 'fromUser' }, function(err, populated){
+          res.json(populated);
+        });
       }
-    },
-    { $sort: { '_id.created': -1 } }
-  ]).exec(function(err, conversations){
-    if(err){
-      console.log(err);
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    }else{
-      var User = mongoose.model('User');
-      User.populate(conversations, {path: 'fromUser'}, function(err, populated){
-        res.json(populated);
-      });
-    }
+    });
+  }else{
+    Message.aggregate([
+      { $match: { $or: [ { toUser: req.user._id },{ fromUser: req.user._id } ] } },
+      {
+        $group: {
+          _id: '$conversationId',
+          messages: { $push : '$$ROOT' },
+          fromUser: { '$first' : '$conversationId' },
+          created: { '$last': '$created' }
+        }
+      },
+      { $sort: { '_id.created': -1 } }
+    ]).exec(function(err, conversations){
+      if(err){
+        console.log(err);
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      }else{
+        var User = mongoose.model('User');
+        User.populate(conversations, { path: 'fromUser' }, function(err, populated){
+          res.json(populated);
+        });
+      }
 
-  });
+    });
+  }
 
 };
 

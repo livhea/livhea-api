@@ -1,15 +1,13 @@
 'use strict';
 
 // conversations controller
-angular.module('conversations').controller('ConversationsController', ['$scope', '$stateParams', '$location', 'Authentication', 'conversations',
-  function ($scope, $stateParams, $location, Authentication, conversations) {
+angular.module('conversations').controller('ConversationsController', ['$scope', '$stateParams', '$location', 'Authentication', 'conversations', 'Admin',
+  function ($scope, $stateParams, $location, Authentication, conversations, Admin) {
     $scope.authentication = Authentication;
 
     // Find a list of conversations
     $scope.find = function () {
       $scope.conversations = conversations.query();
-
-      console.log($scope.conversations);
     };
 
     // Find existing conversation
@@ -17,6 +15,10 @@ angular.module('conversations').controller('ConversationsController', ['$scope',
       $scope.conversation = conversations.get({
         conversationId: $stateParams.conversationId
       });
+    };
+
+    $scope.listUsers = function() {
+      $scope.users = Admin.query();
     };
   }
 ]);
