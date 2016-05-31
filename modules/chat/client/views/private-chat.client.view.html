@@ -1,7 +1,7 @@
 <!-- The chat view -->
 <section class="container" ng-controller="PrivateChatController">
   <div class="page-header">
-    <h1>Private Chat Example</h1>
+    <h4>Private Conversation</h4>
   </div>
   <!-- The message form -->
   <form class="col-xs-12 col-md-offset-4 col-md-4" ng-submit="communicate();">
@@ -18,9 +18,9 @@
     <!-- List all messages -->
     <li class="col-xs-12 col-md-offset-4 col-md-4 chat-message" ng-repeat="message in messages">
       <small class="pull-right text-muted" ng-bind="message.created | date:'mediumTime'"></small>
-      <img ng-src="{{message.profileImageURL}}" alt="{{message.username}}" class="pull-left chat-profile-image" />
+      <img ng-src="{{message.fromUser.profileImageURL}}" alt="{{message.fromUser.username}}" class="pull-left chat-profile-image" />
       <div class="pull-left chat-message-details">
-        <strong ng-bind="message.username"></strong>
+        <strong ng-bind="message.fromUser.displayName"></strong>
         <br>
         <span ng-bind="message.text"></span>
       </div>

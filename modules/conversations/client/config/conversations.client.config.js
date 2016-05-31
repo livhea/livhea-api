@@ -17,5 +17,10 @@ angular.module('conversations').run(['Menus',
       state: 'conversations.list'
     });
 
+    Menus.addSubMenuItem('topbar', 'conversations', {
+      title: 'List All Users',
+      state: 'conversations.users'
+    });
+
   }
 ]);
