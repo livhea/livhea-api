@@ -16,10 +16,6 @@ var MessageSchema = new Schema({
     required: 'Please enter a Message to send',
     trim: true
   },
-  created: {
-    type: Date,
-    default: Date.now
-  },
   fromUser: {
     type: Schema.ObjectId,
     ref: 'User'
@@ -32,6 +28,8 @@ var MessageSchema = new Schema({
     type: String,
     default: ''
   }
+},{
+  timestamps: true
 });
 
 mongoose.model('Message', MessageSchema);
