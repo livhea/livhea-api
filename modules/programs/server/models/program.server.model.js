@@ -16,10 +16,42 @@ var ProgramSchema = new Schema({
     required: 'Please fill Program name',
     trim: true
   },
-  created: {
-    type: Date,
-    default: Date.now
+  imageURL: {
+    type: String,
+    default: 'modules/users/client/img/profile/default.png'
   },
+
+  /**
+  * Length of Program In Weeks TODO: Review/Refactor
+  */
+  length: {
+    type: Number,
+    default: 1,
+    required: 'Please provide program length in weeks'
+  },
+
+  /**
+  * Subscription amount associated with a program (Affecting My Coach feature only)
+  */
+  price: {
+    type: Number,
+    default: 0
+  },
+
+  /**
+  * Embedded Schema to capture questionnaire
+  */
+  questionnaire: [{
+    type: Schema.Types.Mixed
+  }],
+
+  /**
+  * The Timeline of the program TODO: Refactor
+  */
+  programPlan: [{
+    type: Schema.Types.Mixed
+  }],
+
   user: {
     type: Schema.ObjectId,
     ref: 'User'
