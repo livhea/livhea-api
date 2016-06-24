@@ -9,9 +9,14 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
     // Get the topbar menu
     $scope.menu = Menus.getMenu('topbar');
 
+    //Init Sub-Menus
+    $('.ui.dropdown')
+      .dropdown();
+
     // Toggle the menu items
     $scope.isCollapsed = false;
     $scope.toggleCollapsibleMenu = function () {
+      $('.ui.sidebar').sidebar('toggle');
       $scope.isCollapsed = !$scope.isCollapsed;
     };
 
