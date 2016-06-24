@@ -31,14 +31,14 @@ var ArticleSchema = new Schema({
   },
 
   /**
-  * Type will help in deciding the presentation of the article
+  *  Presentation style of the article
   */
-  type: {
+  display: {
     type: String,
-    enum: ['audio', 'video', 'text', 'image', 'markdown', 'html' ,'mixed'],
-    default: 'markdown',
+    enum: ['audio', 'video', 'text', 'image', 'html' ,'mixed'],
+    default: 'html',
     trim: true,
-    required: 'Type cannot be blank'
+    required: 'Display type cannot be blank'
   },
 
   /**
