@@ -84,13 +84,6 @@ var UserSchema = new Schema({
     default: ['user'],
     required: 'Please provide at least one role'
   },
-  updated: {
-    type: Date
-  },
-  created: {
-    type: Date,
-    default: Date.now
-  },
   /* For reset password */
   resetPasswordToken: {
     type: String
@@ -101,7 +94,17 @@ var UserSchema = new Schema({
   assignedCoaches: [{
     type: Schema.ObjectId,
     ref: 'User'
+  }],
+  /**Collection of Programs associated with a User
+  * Assumption is this that A User will not have more than 3 programs in total,
+  * but this design can scale well, unless hit by the hard limit of 16MB per document
+  */
+  programs: [{
+    type: Schema.ObjectId,
+    ref: 'Program'
   }]
+},{
+  timestamps: true
 });
 
 /**

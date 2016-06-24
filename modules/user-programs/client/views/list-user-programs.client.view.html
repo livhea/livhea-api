@@ -1,0 +1,22 @@
+<section>
+  <div class="page-header">
+    <h1>User programs</h1>
+  </div>
+  <div class="list-group">
+    <a data-ng-repeat="user-program in vm.userPrograms"
+       data-ui-sref="userPrograms.view({ user-programId: user-program._id })"
+       class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span data-ng-bind="userProgram.created | date:'mediumDate'"></span>
+        by
+        <span data-ng-if="userProgram.user" data-ng-bind="userProgram.user.displayName"></span>
+        <span data-ng-if="!userProgram.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" data-ng-bind="user-program.name"></h4>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" data-ng-if="vm.userPrograms.$resolved && !vm.userPrograms.length">
+    No User programs yet, why don't you <a data-ui-sref="userPrograms.create">create one</a>?
+  </div>
+</section>

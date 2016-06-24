@@ -10,10 +10,6 @@ var mongoose = require('mongoose'),
  * Article Schema
  */
 var ArticleSchema = new Schema({
-  created: {
-    type: Date,
-    default: Date.now
-  },
   title: {
     type: String,
     default: '',
@@ -25,10 +21,34 @@ var ArticleSchema = new Schema({
     default: '',
     trim: true
   },
+  program: {
+    type: Schema.ObjectId,
+    ref: 'Program'
+  },
   user: {
     type: Schema.ObjectId,
     ref: 'User'
-  }
+  },
+
+  /**
+  *  Presentation style of the article
+  */
+  display: {
+    type: String,
+    enum: ['audio', 'video', 'text', 'image', 'html' ,'mixed'],
+    default: 'html',
+    trim: true,
+    required: 'Display type cannot be blank'
+  },
+
+  /**
+  * Taxonomy to enable classification compliant to REST standards
+  */
+  taxonomy:[{
+    type: Schema.Types.Mixed
+  }]
+},{
+  timestamps: true
 });
 
 mongoose.model('Article', ArticleSchema);
