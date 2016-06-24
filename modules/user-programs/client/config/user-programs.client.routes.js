@@ -29,7 +29,7 @@
         controller: 'UserProgramsController',
         controllerAs: 'vm',
         resolve: {
-          user-programResolve: newUserProgram
+          userProgramResolve: newUserProgram
         },
         data: {
           roles: ['user', 'admin'],
@@ -42,7 +42,7 @@
         controller: 'UserProgramsController',
         controllerAs: 'vm',
         resolve: {
-          user-programResolve: getUserProgram
+          userProgramResolve: getUserProgram
         },
         data: {
           roles: ['user', 'admin'],
@@ -55,7 +55,7 @@
         controller: 'UserProgramsController',
         controllerAs: 'vm',
         resolve: {
-          user-programResolve: getUserProgram
+          userProgramResolve: getUserProgram
         },
         data:{
           pageTitle: 'User program {{ articleResolve.name }}'

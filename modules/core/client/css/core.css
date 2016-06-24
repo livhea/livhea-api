@@ -1,9 +1,9 @@
-.content {
+/*.content {
   margin-top: 50px;
 }
 .undecorated-link:hover {
   text-decoration: none;
-}
+}*/
 [ng\:cloak],
 [ng-cloak],
 [x-ng-cloak],
@@ -11,6 +11,7 @@
 .x-ng-cloak {
   display: none !important;
 }
+
 .header-profile-image {
   opacity: 0.8;
   height: 28px;
@@ -34,4 +35,89 @@ a:hover .header-profile-image {
 }
 .has-error .help-inline.error-text {
   display: inline;
+}
+
+.hidden.menu {
+  display: none;
+}
+
+.top-menu.segment {
+  padding: 0.2em 0em;
+}
+.top-menu .logo.item img {
+  margin-right: 1em;
+  height: 1em;
+}
+.top-menu .ui.menu .ui.button {
+  margin-left: 0.5em;
+}
+.top-menu h1.ui.header {
+  margin-top: 3em;
+  margin-bottom: 0em;
+  font-size: 4em;
+  font-weight: normal;
+}
+.top-menu h2 {
+  font-size: 1.7em;
+  font-weight: normal;
+}
+
+.ui.vertical.stripe {
+  /*padding: 8em 0em;*/
+}
+.ui.vertical.stripe h3 {
+  font-size: 2em;
+}
+.ui.vertical.stripe .button + h3,
+.ui.vertical.stripe p + h3 {
+  margin-top: 3em;
+}
+.ui.vertical.stripe .floated.image {
+  clear: both;
+}
+.ui.vertical.stripe p {
+  font-size: 1.33em;
+}
+.ui.vertical.stripe .horizontal.divider {
+  margin: 3em 0em;
+}
+
+.quote.stripe.segment {
+  padding: 0em;
+}
+.quote.stripe.segment .grid .column {
+  padding-top: 5em;
+  padding-bottom: 5em;
+}
+
+.footer.segment {
+  padding: 5em 0em;
+}
+
+.secondary.menu .toc.item {
+  display: none;
+}
+
+@media only screen and (max-width: 700px) {
+  .ui.fixed.menu {
+    display: none !important;
+  }
+  .secondary.pointing.menu .item,
+  .secondary.pointing.menu .menu {
+    display: none;
+  }
+  .secondary.menu .toc.item {
+    display: block;
+  }
+  .top-menu.segment {
+    padding: 0.2em 0em;
+  }
+  .top-menu h1.ui.header {
+    font-size: 2em;
+    margin-top: 1.5em;
+  }
+  .top-menu h2 {
+    margin-top: 0.5em;
+    font-size: 1.5em;
+  }
 }
