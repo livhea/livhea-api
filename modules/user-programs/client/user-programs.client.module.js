@@ -1,5 +1,5 @@
 (function (app) {
   'use strict';
 
-  app.registerModule('user-programs');
+  app.registerModule('userPrograms');
 })(ApplicationConfiguration);

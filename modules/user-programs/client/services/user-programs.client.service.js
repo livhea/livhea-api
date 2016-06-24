@@ -3,7 +3,7 @@
   'use strict';
 
   angular
-    .module('user-programs')
+    .module('userPrograms')
     .factory('UserProgramsService', UserProgramsService);
 
   UserProgramsService.$inject = ['$resource'];

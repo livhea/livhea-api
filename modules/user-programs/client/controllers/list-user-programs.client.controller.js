@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('user-programs')
+    .module('userPrograms')
     .controller('UserProgramsListController', UserProgramsListController);
 
   UserProgramsListController.$inject = ['UserProgramsService'];
