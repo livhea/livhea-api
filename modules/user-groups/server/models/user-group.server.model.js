@@ -16,14 +16,12 @@ var UserGroupSchema = new Schema({
     required: 'Please fill User group name',
     trim: true
   },
-  created: {
-    type: Date,
-    default: Date.now
-  },
   users: [{
     type: Schema.ObjectId,
     ref: 'User'
   }]
+},{
+  timestamps: true
 });
 
 mongoose.model('UserGroup', UserGroupSchema);

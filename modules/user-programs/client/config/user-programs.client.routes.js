@@ -2,19 +2,19 @@
   'use strict';
 
   angular
-    .module('user-programs')
+    .module('userPrograms')
     .config(routeConfig);
 
   routeConfig.$inject = ['$stateProvider'];
 
   function routeConfig($stateProvider) {
     $stateProvider
-      .state('user-programs', {
+      .state('userPrograms', {
         abstract: true,
         url: '/user-programs',
         template: '<ui-view/>'
       })
-      .state('user-programs.list', {
+      .state('userPrograms.list', {
         url: '',
         templateUrl: 'modules/user-programs/client/views/list-user-programs.client.view.html',
         controller: 'UserProgramsListController',
@@ -23,7 +23,7 @@
           pageTitle: 'User programs List'
         }
       })
-      .state('user-programs.create', {
+      .state('userPrograms.create', {
         url: '/create',
         templateUrl: 'modules/user-programs/client/views/form-user-program.client.view.html',
         controller: 'UserProgramsController',
@@ -36,7 +36,7 @@
           pageTitle : 'User programs Create'
         }
       })
-      .state('user-programs.edit', {
+      .state('userPrograms.edit', {
         url: '/:userProgramId/edit',
         templateUrl: 'modules/user-programs/client/views/form-user-program.client.view.html',
         controller: 'UserProgramsController',
@@ -49,7 +49,7 @@
           pageTitle: 'Edit User program {{ user-programResolve.name }}'
         }
       })
-      .state('user-programs.view', {
+      .state('userPrograms.view', {
         url: '/:userProgramId',
         templateUrl: 'modules/user-programs/client/views/view-user-program.client.view.html',
         controller: 'UserProgramsController',

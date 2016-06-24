@@ -3,7 +3,7 @@
 
   // User programs controller
   angular
-    .module('user-programs')
+    .module('userPrograms')
     .controller('UserProgramsController', UserProgramsController);
 
   UserProgramsController.$inject = ['$scope', '$state', 'Authentication', 'userProgramResolve'];
