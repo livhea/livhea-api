@@ -17,6 +17,19 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
+    vm.stepForward = stepForward;
+    vm.stepBackward = stepBackward;
+    vm.currentStep = 1;
+
+    function stepForward(){
+      vm.currentStep++;
+      console.log(vm.currentStep);
+    }
+
+    function stepBackward(){
+      vm.currentStep--;
+      console.log(vm.currentStep);
+    }
 
     // Remove existing Program
     function remove() {

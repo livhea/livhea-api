@@ -12,7 +12,7 @@ angular.module('programs').run(['Menus',
 
     // Add the dropdown list item
     Menus.addSubMenuItem('topbar', 'programs', {
-      title: 'List Conversations',
+      title: 'List Programs',
       state: 'programs.list'
     });
 
