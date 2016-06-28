@@ -4,7 +4,7 @@
 * Module dependencies.
 */
 var mongoose = require('mongoose'),
-Schema = mongoose.Schema;
+  Schema = mongoose.Schema;
 
 /**
 * User program Schema - Join Collection to caputre Program specific details from

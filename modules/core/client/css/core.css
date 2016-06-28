@@ -42,7 +42,7 @@ a:hover .header-profile-image {
 }
 
 .top-menu.segment {
-  padding: 0.2em 0em;
+  padding: 0.2em 0;
 }
 .top-menu .logo.item img {
   margin-right: 1em;
@@ -53,7 +53,7 @@ a:hover .header-profile-image {
 }
 .top-menu h1.ui.header {
   margin-top: 3em;
-  margin-bottom: 0em;
+  margin-bottom: 0;
   font-size: 4em;
   font-weight: normal;
 }
@@ -63,7 +63,7 @@ a:hover .header-profile-image {
 }
 
 .ui.vertical.stripe {
-  /*padding: 8em 0em;*/
+  padding: 8em 0;
 }
 .ui.vertical.stripe h3 {
   font-size: 2em;
@@ -79,11 +79,11 @@ a:hover .header-profile-image {
   font-size: 1.33em;
 }
 .ui.vertical.stripe .horizontal.divider {
-  margin: 3em 0em;
+  margin: 3em 0;
 }
 
 .quote.stripe.segment {
-  padding: 0em;
+  padding: 0;
 }
 .quote.stripe.segment .grid .column {
   padding-top: 5em;
@@ -91,7 +91,7 @@ a:hover .header-profile-image {
 }
 
 .footer.segment {
-  padding: 5em 0em;
+  padding: 5em 0;
 }
 
 .secondary.menu .toc.item {
@@ -110,7 +110,7 @@ a:hover .header-profile-image {
     display: block;
   }
   .top-menu.segment {
-    padding: 0.2em 0em;
+    padding: 0.2em 0;
   }
   .top-menu h1.ui.header {
     font-size: 2em;

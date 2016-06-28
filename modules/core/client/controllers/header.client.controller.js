@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('core').controller('HeaderController', ['$scope', '$state', 'Authentication', 'Menus',
-  function ($scope, $state, Authentication, Menus) {
+angular.module('core').controller('HeaderController', ['$scope', '$state', 'Authentication', 'Menus', '$timeout',
+  function ($scope, $state, Authentication, Menus, $timeout) {
     // Expose view variables
     $scope.$state = $state;
     $scope.authentication = Authentication;
@@ -9,9 +9,7 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
     // Get the topbar menu
     $scope.menu = Menus.getMenu('topbar');
 
-    //Init Sub-Menus
-    $('.ui.dropdown')
-      .dropdown();
+    $ = window.jQuery;
 
     // Toggle the menu items
     $scope.isCollapsed = false;
@@ -24,5 +22,11 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
     $scope.$on('$stateChangeSuccess', function () {
       $scope.isCollapsed = false;
     });
+
+    $timeout(function(){
+      //Init Sub-Menus
+      $('.ui.dropdown')
+        .dropdown();
+    }, 10);
   }
 ]);

@@ -4,7 +4,7 @@
 * Module dependencies.
 */
 var mongoose = require('mongoose'),
-Schema = mongoose.Schema;
+  Schema = mongoose.Schema;
 
 /**
 * Program Schema
@@ -16,6 +16,11 @@ var ProgramSchema = new Schema({
     required: 'Please fill Program name',
     trim: true
   },
+  description: {
+    type: String,
+    default: '',
+    trim: true
+  },
   imageURL: {
     type: String,
     default: 'modules/users/client/img/profile/default.png'
@@ -24,7 +29,7 @@ var ProgramSchema = new Schema({
   /**
   * Length of Program In Weeks TODO: Review/Refactor
   */
-  length: {
+  duration: {
     type: Number,
     default: 1,
     required: 'Please provide program length in weeks'
