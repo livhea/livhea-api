@@ -3,8 +3,8 @@
 
   // Articles controller
   angular
-    .module('articles')
-    .controller('ArticlesController', ArticlesController);
+  .module('articles')
+  .controller('ArticlesController', ArticlesController);
 
   ArticlesController.$inject = ['$scope', '$state', 'Authentication', 'articleResolve'];
 
@@ -18,6 +18,7 @@
     vm.remove = remove;
     vm.save = save;
 
+
     // Remove existing Article
     function remove() {
       if (confirm('Are you sure you want to delete?')) {
@@ -27,6 +28,7 @@
 
     // Save Article
     function save(isValid) {
+      console.log(isValid);
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.articleForm');
         return false;

@@ -13,9 +13,9 @@
       <a class="toc item" ng-click="toggleCollapsibleMenu()">
         <i class="sidebar icon"></i>
       </a>
-      <div class="logo item">
+      <a class="logo item" href="/">
         <img class="ui image" src="modules/core/client/img/brand/logo.png" />
-      </div>
+      </a>
 
       <div ng-repeat="item in menu.items | orderBy: 'position'"
         ng-if="item.shouldRender(authentication.user);"

@@ -16,7 +16,8 @@
     "angular": true,
     "io": true,
     "ApplicationConfiguration": true,
-    "$": true
+    "$": true,
+    "EpicEditor": true
   },
   "predef": [ // Extra globals.
     "inject",

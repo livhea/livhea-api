@@ -1,21 +1,21 @@
-<section ng-controller="HomeController">
-  <div>
-    <h1>LivHea App</h1>
-    <h2>v0.0.1</h2>
-    <p>TODO:</p>
-    <ul>
-      <li>
-        <strike>Social Login</strike>
-      </li>
-      <li>
-        <strike>Private Chat</strike>
-      </li>
-      <li>
-        <strike>Conversation List for Coaches</strike>
-      </li>
-      <li>
-        Add new CRUD modules for User Profile.
-      </li>
-    </ul>
+
+<section class="ui basic segment" ng-controller="HomeController">
+  <div class = "ui main text container">
+
+
+    <div class="ui link cards" >
+      <a class="fluid card" data-ng-repeat="article in articles"
+      data-ui-sref="articles.view({ articleId: article._id })">
+      <div class="image">
+        <img ng-src="{{article.featuredImage}}">
+      </div>
+      <div class="content">
+        <div class="header" ng-bind="article.title"></div>
+        <div class="description" ng-bind="article.excerpt"></div>
+      </div>
+      <div class="extra content">
+        <span class="right floated" ng-bind="article.createdAt | date: 'EEEE, dd MMM yyyy'"></span>
+      </div>
+    </a>
   </div>
 </section>
