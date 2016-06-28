@@ -4,164 +4,172 @@
 
   <!-- <div class="ui divider"></div> -->
   <!-- <div class="ui one column centered grid"> -->
-  <div class="ui segment basic">
-    <div class="ui steps">
-      <div class="step" ng-class="{active: vm.currentStep == 1}">
-        <i class="file text outline icon"></i>
-        <div class="content">
-          <div class="title">Details</div>
-          <div class="description">Configure Program details</div>
+  <div class="ui text container">
+
+
+    <div class="ui segment basic">
+      <div class="ui steps">
+        <div class="step" ng-class="{active: vm.currentStep == 1}">
+          <i class="file text outline icon"></i>
+          <div class="content">
+            <div class="title">Details</div>
+            <div class="description">Program details</div>
+          </div>
         </div>
-      </div>
-      <div class="step" ng-class="{active: vm.currentStep == 2}">
-        <i class="configure icon"></i>
-        <div class="content">
-          <div class="title">User Questionnaire</div>
-          <div class="description">Configure questionnaire for users</div>
+        <div class="step" ng-class="{active: vm.currentStep == 2}">
+          <i class="configure icon"></i>
+          <div class="content">
+            <div class="title">Questionnaire</div>
+            <div class="description">Questions for user &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+          </div>
         </div>
-      </div>
-      <div class=" step" ng-class="{active: vm.currentStep == 3}">
-        <i class="info icon"></i>
-        <div class="content">
-          <div class="title">Plan</div>
-          <div class="description">Configure execution plan of program</div>
+        <div class="disabled step" ng-class="{active: vm.currentStep == 3}">
+          <i class="info icon"></i>
+          <div class="content">
+            <div class="title">Plan</div>
+            <div class="description">Execution plan of program</div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <!-- </div> -->
+    <!-- </div> -->
 
-  <form class="ui form segment basic" name="programForm">
-
-
-    <div class="ui segment" ng-if="vm.currentStep == 1">
-      <h3 class="ui header">Program Details</h3>
-      <div class="ui divider"></div>
-
-      <div class="field">
-        <label>Name</label>
-        <input placeholder="Enter Program Name" name="name" type="text" ng-model="vm.program.name">
-        <div ng-show="vm.form.programForm.name.$error" class="ui pointing red basic label" ng-messages="vm.form.programForm.name.$error">
-          Please enter a value
-        </div>
-      </div>
-
-      <div class="field">
-        <label>Description</label>
-        <textarea placeholder="Enter Program description" name="description" ng-model="vm.program.description"></textarea>
-      </div>
-
-      <div class="field">
-        <label>Duration (in weeks)</label>
-        <input placeholder="Enter Program Name" name="duration" type="number" ng-model="vm.program.duration">
-      </div>
-
-      <div class="field">
-        <label>Amount</label>
-        <div class="ui right labeled input">
-          <div class="ui label">&#8377;</div>
-          <input type="text" placeholder="Amount" name="amount" ng-model="vm.program.amount">
-          <div class="ui basic label">.00</div>
-        </div>
-      </div>
-
-      <button type="button" class="ui floated right labeled icon green button" ng-click="vm.stepForward()">
-        <i class="right arrow icon"></i>
-        Proceed
-      </button>
-      <div class="ui error message"></div>
-    </div>
+    <form class="ui form segment basic" name="vm.form.programForm" ng-submit="vm.save(vm.form.programForm.$valid)">
 
 
-    <div class="ui segment" ng-show="vm.currentStep == 2">
-      <h3 class="ui header">Configure User Questionnaire</h3>
-      <div class="ui divider"></div>
+      <div class="ui segment" ng-if="vm.currentStep == 1">
+        <h3 class="ui header">Program Details</h3>
+        <div class="ui divider"></div>
 
-      <div class="ui segment">
         <div class="field">
-          <label>Question</label>
-          <input placeholder="Enter Question" name="question" type="text" ng-model="vm.question.text">
-        </div>
-        <div class="field">
-          <label>Label</label>
-          <input placeholder="Enter Label" name="label" type="text" ng-model="vm.question.label">
-        </div>
-        <div class="field">
-          <label>Data Type</label>
-          <select class="ui search dropdown">
-            <option value="">Type</option>
-            <option value="text">Text</option>
-            <option value="textarea">Large Text</option>
-            <option value="number">Number</option>
-            <option value="date">Date</option>
-            <option value="time">Time</option>
-            <option value="multiselect">Multi Select</option>
-            <option value="select">Single Select</option>
-          </select>
+          <label>Name</label>
+          <input placeholder="Enter Program Name" name="name" type="text" ng-model="vm.program.name">
+          <!-- <div ng-show="vm.form.programForm.name.$error" class="ui pointing red basic label" ng-messages="vm.form.programForm.name.$error">
+            Please enter a value
+          </div> -->
         </div>
 
-        <button class="ui labeled icon teal button" ng-click="vm.addQuestion()">
-          <i class="plus icon"></i>
-          Add
+        <div class="field">
+          <label>Image</label>
+          <input placeholder="Enter Image Url" name="name" type="text" ng-model="vm.program.imageUrl">
+        </div>
+
+        <div class="field">
+          <label>Description</label>
+          <textarea placeholder="Enter Program description" name="description" ng-model="vm.program.description"></textarea>
+        </div>
+
+        <div class="field">
+          <label>Duration (in weeks)</label>
+          <input placeholder="Enter Program Name" name="duration" type="number" ng-model="vm.program.duration">
+        </div>
+
+        <div class="field">
+          <label>Amount</label>
+          <div class="ui right labeled input">
+            <div class="ui label">&#8377;</div>
+            <input type="text" placeholder="Amount" name="amount" ng-model="vm.program.price">
+            <div class="ui basic label">.00</div>
+          </div>
+        </div>
+
+        <button type="submit" class="ui floated right labeled icon green button">
+          <i class="right arrow icon"></i>
+          Proceed
         </button>
+        <div class="ui error message"></div>
       </div>
 
 
-      <button class="ui labeled icon blue button" ng-click="vm.stepBackward()">
-        <i class="left arrow icon"></i>
-        Back
-      </button>
-      <button class="ui right labeled icon green button" ng-click="vm.stepForward()">
-        <i class="right arrow icon"></i>
-        Next
-      </button>
-      <div class="ui error message"></div>
-    </div>
+      <div class="ui segment" ng-show="vm.currentStep == 2">
+        <h3 class="ui header">Configure User Questionnaire</h3>
+        <div class="ui divider"></div>
+
+        <div class="ui segment">
+          <div class="field">
+            <label>Question</label>
+            <input placeholder="Enter Question" name="question" type="text" ng-model="vm.question.text">
+          </div>
+          <div class="field">
+            <label>Label</label>
+            <input placeholder="Enter Label" name="label" type="text" ng-model="vm.question.label">
+          </div>
+          <div class="field">
+            <label>Data Type</label>
+            <select class="ui search dropdown">
+              <option value="">Type</option>
+              <option value="text">Text</option>
+              <option value="textarea">Large Text</option>
+              <option value="number">Number</option>
+              <option value="date">Date</option>
+              <option value="time">Time</option>
+              <option value="multiselect">Multi Select</option>
+              <option value="select">Single Select</option>
+            </select>
+          </div>
+
+          <button class="ui labeled icon teal button" ng-click="vm.addQuestion()">
+            <i class="plus icon"></i>
+            Add
+          </button>
+        </div>
 
 
-
-    <div class="ui segment" ng-show="vm.currentStep == 3">
-      <h3 class="ui header">Program Details</h3>
-      <div class="ui divider"></div>
-
-      <div class="field">
-        <label>Name</label>
-        <input placeholder="Enter Program Name" name="name" type="text" ng-model="vm.program.name">
+        <button class="ui labeled icon blue button" ng-click="vm.stepBackward()">
+          <i class="left arrow icon"></i>
+          Back
+        </button>
+        <button class="ui right labeled icon green button" ng-click="vm.stepForward()">
+          <i class="right arrow icon"></i>
+          Next
+        </button>
+        <div class="ui error message"></div>
       </div>
 
-      <div class="field">
-        <label>Description</label>
-        <textarea placeholder="Enter Program description" ng-model="vm.program.description"></textarea>
-      </div>
 
-      <div class="field">
-        <label>Duration (in weeks)</label>
-        <input placeholder="Enter Program Name" name="length" type="number" ng-model="vm.program.duration">
-      </div>
 
-      <div class="field">
-        <label>Amount</label>
-        <div class="ui right labeled input">
-          <div class="ui label">&#8377;</div>
-          <input type="text" placeholder="Amount" ng-model="vm.program.amount">
-          <div class="ui basic label">.00</div>
+      <div class="ui segment" ng-show="vm.currentStep == 3">
+        <h3 class="ui header">Program Details</h3>
+        <div class="ui divider"></div>
+
+        <div class="field">
+          <label>Name</label>
+          <input placeholder="Enter Program Name" name="name" type="text" ng-model="vm.program.name">
+        </div>
+
+        <div class="field">
+          <label>Description</label>
+          <textarea placeholder="Enter Program description" ng-model="vm.program.description"></textarea>
+        </div>
+
+        <div class="field">
+          <label>Duration (in weeks)</label>
+          <input placeholder="Enter Program Name" name="length" type="number" ng-model="vm.program.duration">
+        </div>
+
+        <div class="field">
+          <label>Amount</label>
+          <div class="ui right labeled input">
+            <div class="ui label">&#8377;</div>
+            <input type="text" placeholder="Amount" ng-model="vm.program.amount">
+            <div class="ui basic label">.00</div>
+          </div>
+        </div>
+
+        <div class="ui floated right labeled icon green submit button" ng-click="vm.stepForward()">
+          <i class="right arrow icon"></i>
+          Proceed
+        </div>
+        <div ng-show="vm.error" class="ui error message">
+          <strong ng-bind="vm.error"></strong>
         </div>
       </div>
 
-      <div class="ui floated right labeled icon green submit button" ng-click="vm.stepForward()">
-        <i class="right arrow icon"></i>
-        Proceed
-      </div>
-      <div ng-show="vm.error" class="ui error message">
-        <strong ng-bind="vm.error"></strong>
-      </div>
-    </div>
 
 
+    </form>
 
-  </form>
-
-
+  </div>
 
   <!-- <div class="col-md-12">
   <form name="vm.form.programForm" class="form-horizontal" ng-submit="vm.save(vm.form.programForm.$valid)" novalidate>

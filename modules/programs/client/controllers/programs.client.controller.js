@@ -3,8 +3,8 @@
 
   // Programs controller
   angular
-    .module('programs')
-    .controller('ProgramsController', ProgramsController);
+  .module('programs')
+  .controller('ProgramsController', ProgramsController);
 
   ProgramsController.$inject = ['$scope', '$state', 'Authentication', 'programResolve'];
 
@@ -40,6 +40,9 @@
 
     // Save Program
     function save(isValid) {
+
+      console.log(isValid);
+
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.programForm');
         return false;
@@ -53,9 +56,16 @@
       }
 
       function successCallback(res) {
-        $state.go('programs.view', {
-          programId: res._id
-        });
+        switch(vm.currentStep){
+          case 1:
+          case 2:
+            stepForward();
+            break;
+          default:
+            $state.go('programs.view', {
+              programId: res._id
+            });
+        }
       }
 
       function errorCallback(res) {
