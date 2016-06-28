@@ -31,7 +31,7 @@
   </div>
   <!-- </div> -->
 
-  <form class="ui form segment basic">
+  <form class="ui form segment basic" name="programForm">
 
     <div class="ui two column grid" ng-if="vm.currentStep == 1">
       <div class="column">
@@ -42,6 +42,9 @@
           <div class="field">
             <label>Name</label>
             <input placeholder="Enter Program Name" name="name" type="text" ng-model="vm.program.name">
+            <div class="ui pointing red basic label" ng-messages="vm.form.programForm.name.$error">
+              Please enter a value
+            </div>
           </div>
 
           <div class="field">
