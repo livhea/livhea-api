@@ -21,7 +21,7 @@ var ProgramSchema = new Schema({
     default: '',
     trim: true
   },
-  imageURL: {
+  imageUrl: {
     type: String,
     default: 'modules/users/client/img/profile/default.png'
   },

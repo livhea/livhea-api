@@ -1,22 +1,33 @@
-<section class="ui container segment">
-  <div class="page-header">
-    <h1>Programs</h1>
-  </div>
-  <div class="list-group">
-    <a data-ng-repeat="program in vm.programs"
-       data-ui-sref="programs.view({ programId: program._id })"
-       class="list-group-item">
-      <small class="list-group-item-text">
-        Posted on
-        <span data-ng-bind="program.created | date:'mediumDate'"></span>
-        by
-        <span data-ng-if="program.user" data-ng-bind="program.user.displayName"></span>
-        <span data-ng-if="!program.user">Deleted User</span>
-      </small>
-      <h4 class="list-group-item-heading" data-ng-bind="program.name"></h4>
+<section class="ui basic segment">
+  <div class = "ui main text container">
+
+    <h1 class="ui header">Programs</h1>
+    <div class="ui divider"></div>
+
+
+    <div class="ui link cards" data-ng-if="vm.programs.$resolved && vm.programs.length">
+      <a class="fluid card" data-ng-repeat="program in vm.programs"
+      data-ui-sref="programs.view({ programId: program._id })">
+      <div class="image">
+        <img ng-src="{{program.imageUrl}}">
+      </div>
+      <div class="content">
+        <div class="header" ng-bind="program.name"></div>
+        <div class="description" ng-bind="program.description"></div>
+      </div>
+      <div class="extra content">
+        <span class="left floated">
+          <i class="calendar icon"></i>
+          {{program.duration}} weeks
+        </span>
+        <span class="right floated" ng-bind="program.price | currency:'₹'"></span>
+      </div>
     </a>
   </div>
-  <div class="alert alert-warning text-center" data-ng-if="vm.programs.$resolved && !vm.programs.length">
-    No Programs yet, why don't you <a data-ui-sref="programs.create">create one</a>?
+  <div class="ui tertiary inverted teal segment" data-ng-if="vm.programs.$resolved && !vm.programs.length">
+    <p class="ui text container">No Programs yet, why don't you <a data-ui-sref="programs.create">create one</a>?</p>
   </div>
+
+</div>
+
 </section>
