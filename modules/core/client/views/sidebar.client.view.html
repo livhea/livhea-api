@@ -32,20 +32,11 @@
 </div> -->
 
 <div class="ui vertical menu" ng-controller="HeaderController">
-  <a class="active teal item">
-    Inbox
-    <div class="ui teal left pointing label">1</div>
-  </a>
-  <a class="item">
-    Spam
-    <div class="ui label">51</div>
-  </a>
-  <a class="item">
-    Updates
-    <div class="ui label">1</div>
-  </a>
+  <div class="active teal item" ng-show="authentication.user">
+    Welcome  <span ng-bind="authentication.user.displayName"></span>!
+  </div>
   <div ng-repeat="item in menu.items | orderBy: 'position'"
-    ng-if="item.shouldRender(authentication.user);"
+    ng-if="item.shouldRender(authentication.user) && item.type === 'dropdown'"
     ng-switch="item.type"
     ng-class="{ 'item': item.type !== 'dropdown', 'ui dropdown item': item.type === 'dropdown' }"
     class="{{item.class}}">
@@ -55,10 +46,6 @@
       <a ui-sref="{{subitem.state}}" ng-bind="subitem.title" ng-repeat="subitem in item.items | orderBy: 'position'" ng-if="subitem.shouldRender(authentication.user);" class="item"></a>
     </div>
   </div>
-  <div class="item">
-    <div class="ui transparent icon input">
-      <input type="text" placeholder="Search mail...">
-      <i class="search icon"></i>
-    </div>
-  </div>
+  <a class="item" ng-repeat="item in menu.items | orderBy: 'position'" ng-if="item.type !== 'dropdown'" ui-sref="{{item.state}}" ng-bind="item.title"></a>
+
 </div>
