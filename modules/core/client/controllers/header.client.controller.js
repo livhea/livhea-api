@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('core').controller('HeaderController', ['$scope', '$state', 'Authentication', 'Menus', '$timeout',
-  function ($scope, $state, Authentication, Menus, $timeout) {
+angular.module('core').controller('HeaderController', ['$scope', '$state', 'Authentication', 'Menus', '$timeout', '$rootScope',
+  function ($scope, $state, Authentication, Menus, $timeout, $rootScope) {
     // Expose view variables
     $scope.$state = $state;
     $scope.authentication = Authentication;
@@ -23,10 +23,9 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
       $scope.isCollapsed = false;
     });
 
-    $timeout(function(){
-      //Init Sub-Menus
-      $('.ui.dropdown')
-        .dropdown();
-    }, 10);
+    $rootScope.$on('$viewContentLoaded',function(event, view){
+      $('.ui.dropdown').dropdown();
+    });
+
   }
 ]);
