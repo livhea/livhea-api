@@ -1,9 +1,5 @@
 <section class="ui basic segment">
 
-
-
-  <!-- <div class="ui divider"></div> -->
-  <!-- <div class="ui one column centered grid"> -->
   <div class="ui text container">
 
 
@@ -32,7 +28,6 @@
         </div>
       </div>
     </div>
-    <!-- </div> -->
 
     <form class="ui form segment basic" name="vm.form.programForm" ng-submit="vm.save(vm.form.programForm.$valid)">
 
@@ -87,52 +82,79 @@
 
         <div class="ui segment">
           <div class="field">
-            <label>Question</label>
-            <input placeholder="Enter Question" name="question" type="text" ng-model="vm.question.text">
+            <label>Create Section</label>
+            <div class="ui action input">
+            <input placeholder="Enter Section Name" name="sectionName" type="text" ng-model="vm.sectionName"/>
+            <button type="button" class="ui positive icon button" ng-click="vm.addSection()"><i class="ui add icon"></i>Add Section</button>
           </div>
-          <div class="field">
-            <label>Label</label>
-            <input placeholder="Enter Label" name="label" type="text" ng-model="vm.question.label">
           </div>
-          <div class="field">
-            <label>Data Type</label>
-            <select class="ui search dropdown">
-              <option value="">Type</option>
-              <option value="text">Text</option>
-              <option value="textarea">Large Text</option>
-              <option value="number">Number</option>
-              <option value="date">Date</option>
-              <option value="time">Time</option>
-              <option value="multiselect">Multi Select</option>
-              <option value="select">Single Select</option>
-            </select>
-          </div>
+        </div>
 
-          <button class="ui labeled icon teal button" ng-click="vm.addQuestion()">
-            <i class="plus icon"></i>
-            Add
-          </button>
+        <div class="ui divider" ng-if="vm.program.questionnaire.length > 0"></div>
+
+        <div class="ui form segment" ng-if="vm.program.questionnaire.length > 0">
+
+          <div class="ui segment" ng-repeat="section in vm.program.questionnaire track by $index">
+            <div class="ui field">
+              <div class="ui action input">
+                <input placeholder="Section Name" ng-model="section.name"/>
+                <div class="ui buttons">
+                  <button type="button" class="ui negative icon button" ng-click="vm.removeSection($index)"><i class="ui remove icon"></i>Remove Section</button>
+                  <div class="or"></div>
+                  <button type="button" class="ui positive icon button" ng-click="vm.addQuestion($index)"><i class="ui add icon"></i>Add Question</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="ui fields" ng-repeat="question in section.questions track by $index">
+                <div class="ui field">
+                  <input type="text" placeholder="Enter Question" ng-model="question.title"/>
+                </div>
+                <div class="ui field">
+                  <input type="text" placeholder="Enter Label" ng-model="question.label"/>
+                </div>
+                <div class="ui field">
+                  <select class="ui dropdown search" ng-model="question.type">
+                    <option value="">Type</option>
+                    <option value="text">Text</option>
+                    <option value="textarea">Large Text</option>
+                    <option value="number">Number</option>
+                    <option value="date">Date</option>
+                    <option value="time">Time</option>
+                    <option value="multiselect">Multi Select</option>
+                    <option value="select">Single Select</option>
+                  </select>
+                </div>
+                <div class="ui field">
+                  <button class="ui negative icon button" ng-click="vm.removeQuestion($parent.$index, $index)"><i class="ui remove icon"></i></button>
+                </div>
+            </div>
+          </div>
         </div>
 
 
-        <button class="ui labeled icon blue button" ng-click="vm.stepBackward()">
+        <button type="button" class="ui labeled icon blue button" ng-click="vm.stepBackward()">
           <i class="left arrow icon"></i>
           Back
         </button>
-        <button class="ui right labeled icon green button" ng-click="vm.stepForward()">
+        <button class="ui right labeled icon green button">
           <i class="right arrow icon"></i>
           Next
         </button>
-        <div class="ui error message"></div>
+        <div ng-show="vm.error" class="ui error message">
+          <strong ng-bind="vm.error"></strong>
+        </div>
       </div>
 
 
 
       <div class="ui segment" ng-show="vm.currentStep == 3">
-        <h3 class="ui header">Program Details</h3>
+        <h3 class="ui header">Program Plan &nbsp; Components</h3>
         <div class="ui divider"></div>
-
-        <div class="field">
+        <p>
+          Under Construction
+        </p>
+        <!-- <div class="field">
           <label>Name</label>
           <input placeholder="Enter Program Name" name="name" type="text" ng-model="vm.program.name">
         </div>
@@ -154,40 +176,16 @@
             <input type="text" placeholder="Amount" ng-model="vm.program.amount">
             <div class="ui basic label">.00</div>
           </div>
-        </div>
+        </div> -->
 
-        <div class="ui floated right labeled icon green submit button" ng-click="vm.stepForward()">
+        <button class="ui right labeled icon positive button">
           <i class="right arrow icon"></i>
-          Proceed
-        </div>
+          Complete
+        </button>
         <div ng-show="vm.error" class="ui error message">
           <strong ng-bind="vm.error"></strong>
         </div>
       </div>
-
-
-
     </form>
-
   </div>
-
-  <!-- <div class="col-md-12">
-  <form name="vm.form.programForm" class="form-horizontal" ng-submit="vm.save(vm.form.programForm.$valid)" novalidate>
-  <fieldset>
-  <div class="form-group" show-errors>
-  <label class="control-label" for="name">Name</label>
-  <input name="name" type="text" ng-model="vm.program.name" id="name" class="form-control" placeholder="Name" required>
-  <div ng-messages="vm.form.programForm.name.$error" role="alert">
-  <p class="help-block error-text" ng-message="required">Program name is required.</p>
-</div>
-</div>
-<div class="form-group">
-<button type="submit" class="btn btn-default">{{vm.program._id ? 'Update' : 'Create'}}</button>
-</div>
-<div ng-show="vm.error" class="text-danger">
-<strong ng-bind="vm.error"></strong>
-</div>
-</fieldset>
-</form>
-</div> -->
 </section>

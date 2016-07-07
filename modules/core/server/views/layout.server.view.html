@@ -41,38 +41,49 @@
 
   <ng-include src="'/modules/core/client/views/header.client.view.html'" ></ng-include>
 
-  <div class="pusher">
-    <div class="ui container">
-      {% block content %}{% endblock %}
+  <div class="ui grid basic segment" style="margin-top:0">
+    <div class="three wide column">
+      <div class="ui left internal dividing rail">
+        <ng-include src="'/modules/core/client/views/sidebar.client.view.html'" ></ng-include>
+      </div>
+    </div>
+    <div class="twelve wide column">
+      <div class="ui container">
+        {% block content %}{% endblock %}
+      </div>
     </div>
   </div>
 
-  <!-- <section class="content">
-  <section class="container">
-  {#% block content %}{% endblock %#}
-</section>
-</section> -->
 
-<!--Embedding The User Object-->
-<script type="text/javascript">
-var user = {{ user | json | safe }};
-</script>
+  <!-- <div class="ui segment">
+    <div class="ui left dividing rail">
+      <div class="ui segment">
+        <ng-include src="'/modules/core/client/views/header.client.view.html'" ></ng-include>
+      </div>
+    </div>
 
-<!--Load The Socket.io File-->
-<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+  </div> -->
 
-<!--Application JavaScript Files-->
-{% for jsFile in jsFiles %}<script type="text/javascript" src="{{jsFile}}"></script>{% endfor %}
+  <!--Embedding The User Object-->
+  <script type="text/javascript">
+  var user = {{ user | json | safe }};
+  </script>
 
-<!-- Add Any Deferred JS Execution here -->
-<script type="text/javascript">
+  <!--Load The Socket.io File-->
+  <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 
-</script>
+  <!--Application JavaScript Files-->
+  {% for jsFile in jsFiles %}<script type="text/javascript" src="{{jsFile}}"></script>{% endfor %}
 
-{% if livereload %}
-<!--Livereload script rendered -->
-<script type="text/javascript" src="{{host}}:35729/livereload.js"></script>
-{% endif %}
+  <!-- Add Any Deferred JS Execution here -->
+  <script type="text/javascript">
+
+  </script>
+
+  {% if livereload %}
+  <!--Livereload script rendered -->
+  <script type="text/javascript" src="{{host}}:35729/livereload.js"></script>
+  {% endif %}
 </body>
 
 </html>

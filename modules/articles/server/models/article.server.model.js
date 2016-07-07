@@ -4,7 +4,7 @@
 * Module dependencies.
 */
 var mongoose = require('mongoose'),
-Schema = mongoose.Schema;
+  Schema = mongoose.Schema;
 
 /**
 * Article Schema
@@ -59,26 +59,26 @@ var ArticleSchema = new Schema({
 },{
   timestamps: true,
   toObject: { virtuals: true },
-    toJSON: { virtuals: true }
+  toJSON: { virtuals: true }
 });
 
 ArticleSchema.virtual('excerpt')
   .get(function(){
-      return this.content.substring(0,140) + '...';
+    return this.content.substring(0,140) + '...';
   });
 
 function slugify(text) {
-      return text.toString().toLowerCase()
-        .replace(/\s+/g, '-')        // Replace spaces with -
-        .replace(/[^\w\-]+/g, '')   // Remove all non-word chars
-        .replace(/\-\-+/g, '-')      // Replace multiple - with single -
-        .replace(/^-+/, '')          // Trim - from start of text
-        .replace(/-+$/, '');         // Trim - from end of text
+  return text.toString().toLowerCase()
+    .replace(/\s+/g, '-')        // Replace spaces with -
+    .replace(/[^\w\-]+/g, '')   // Remove all non-word chars
+    .replace(/\-\-+/g, '-')      // Replace multiple - with single -
+    .replace(/^-+/, '')          // Trim - from start of text
+    .replace(/-+$/, '');         // Trim - from end of text
 }
 
 ArticleSchema.pre('save', function(next){
-    this.url = slugify(this.title); //.substring(0,18);
-    next();
+  this.url = slugify(this.title); //.substring(0,18);
+  next();
 });
 
 mongoose.model('Article', ArticleSchema);
