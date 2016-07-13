@@ -28,7 +28,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
 
         // And redirect to the previous or home page
         var state = 'dashboard.programs';
-        if(response.programs.length  > 0){
+        if(response.programs.length > 0){
           state = 'dashboard.myProgram';
         }else{
           state = 'dashboard.programs';
@@ -56,7 +56,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
         // And redirect to the previous or home page
         // And redirect to the previous or home page
         var state = 'dashboard.programs';
-        if(response.programs.length  > 0){
+        if(response.programs.length > 0){
           state = 'dashboard.myProgram';
         }else{
           state = 'dashboard.programs';
