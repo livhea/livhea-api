@@ -5,7 +5,7 @@ module.exports = {
     lib: {
       css: [
         'public/lib/semantic/dist/semantic.min.css',
-
+        'public/lib/fullcalendar/dist/fullcalendar.print.css'
       ],
       js: [
         'public/lib/jquery/dist/jquery.min.js',
@@ -18,7 +18,9 @@ module.exports = {
         'public/lib/angular-ui-utils/ui-utils.js',
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
         'public/lib/angular-file-upload/angular-file-upload.js',
-        'public/lib/owasp-password-strength-test/owasp-password-strength-test.js'
+        'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
+        'public/lib/moment/min/moment-with-locales.min.js',
+        'public/lib/fullcalendar/dist/fullcalendar.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

@@ -121,3 +121,7 @@ a:hover .header-profile-image {
     font-size: 1.5em;
   }
 }
+
+.center-text{
+  text-align: center;
+}

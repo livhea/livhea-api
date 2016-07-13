@@ -6,8 +6,8 @@ angular.module('users').run(['Menus',
 
 
     Menus.addMenuItem('topbar', {
-      title: 'Consult Myra',
-      state: 'home',
+      title: 'Payments',
+      state: 'payments',
       type: 'item',
       roles: ['user']
     });
@@ -21,7 +21,7 @@ angular.module('users').run(['Menus',
 
     Menus.addMenuItem('topbar', {
       title: 'Milestones',
-      state: 'home',
+      state: 'milestones',
       type: 'item',
       roles: ['user']
     });
@@ -31,6 +31,23 @@ angular.module('users').run(['Menus',
       state: 'home',
       type: 'item',
       roles: ['user']
+    });
+
+    Menus.addMenuItem('topbar', {
+      title: 'Dashboard',
+      state: 'dashboard.myProgram',
+      type: 'item',
+      roles: ['user']
+    });
+
+    Menus.addSubMenuItem('topbar', 'settings', {
+      title: 'Edit Profile',
+      state: 'mpPrograms.profile'
+    });
+
+    Menus.addSubMenuItem('topbar', 'settings', {
+      title: 'Edit Profile',
+      state: 'settings.profile'
     });
 
     Menus.addMenuItem('topbar', {

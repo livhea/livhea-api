@@ -1,37 +1,37 @@
 <section class="ui basic segment">
-    <div class = "ui main text container segment">
-        <div class ="ui huge header">{{vm.article._id ? 'Edit Article' : 'Post New Article'}}</div>
-        <form  name="vm.form.articleForm" class = "ui form" ng-submit="vm.save(vm.form.articleForm.$valid)">
-            <div class = "field">
-                <label>Title</label>
-                      <input type ="text" name = "title" placeholder ="Enter title" ng-model="vm.article.title">
-            </div>
-            <div class = "field">
-                <label>Featured Image</label>
-            <input type ="text" name = "featuredImage" placeholder ="Url to an Image" ng-model="vm.article.featuredImage">
-            </div>
-            <div class = "field">
-                <label>Content</label>
-            <textarea name = "content" placeholder ="Enter your content here" ng-model="vm.article.content"></textarea>
-            </div>
-            <div class = "field">
-                <label>Tags</label>
-            <select class="ui fluid search dropdown" multiple="" name="tags" >
-              <option value="">
-                Tags
-              </option>
-              <option value="pregnancy">
-                Pregnancy
-              </option>
-              <option value="weight-loss">
-                Weight Loss
-              </option>
-            </select>
-            </div>
-            <button class = "ui green button" type="submit">{{vm.article._id ? 'Update' : 'Create'}}</button>
-            <div class="ui error message" ng-show="vm.error">
-                <strong ng-bind="vm.error"></strong>
-            </div>
-        </form>
-    </div>
+  <div class = "ui main text container segment">
+    <div class ="ui huge header">{{vm.article._id ? 'Edit Article' : 'Post New Article'}}</div>
+    <form  name="vm.form.articleForm" class = "ui form" ng-submit="vm.save(vm.form.articleForm.$valid)">
+      <div class = "field">
+        <label>Title</label>
+        <input type ="text" name = "title" placeholder ="Enter title" ng-model="vm.article.title">
+      </div>
+      <div class = "field">
+        <label>Featured Image</label>
+        <input type ="text" name = "featuredImage" placeholder ="Url to an Image" ng-model="vm.article.featuredImage">
+      </div>
+      <div class = "field">
+        <label>Content</label>
+        <textarea name = "content" placeholder ="Enter your content here" ng-model="vm.article.content"></textarea>
+      </div>
+      <div class = "field">
+        <label>Tags</label>
+        <select class="ui fluid search dropdown" multiple="" name="tags" >
+          <option value="">
+            Tags
+          </option>
+          <option value="pregnancy">
+            Pregnancy
+          </option>
+          <option value="weight-loss">
+            Weight Loss
+          </option>
+        </select>
+      </div>
+      <button class = "ui green button" type="submit">{{vm.article._id ? 'Update' : 'Create'}}</button>
+      <div class="ui error message" ng-show="vm.error">
+        <strong ng-bind="vm.error"></strong>
+      </div>
+    </form>
+  </div>
 </section>
