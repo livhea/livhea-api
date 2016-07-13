@@ -1,0 +1,68 @@
+
+<div class = "ui main container basic segment" ng-init="vm.initProgramList()">
+
+  <h1 class="ui header">Programs @ LivHea</h1>
+  <div class="ui divider"></div>
+
+
+  <div class="programs ui link cards" data-ng-if="vm.programs.$resolved && vm.programs.length">
+    <a class="fluid card" data-ng-repeat="program in vm.programs"
+    ng-click="vm.subscribeToProgram(program)">
+    <div class="image">
+      <div class="ui dimmer">
+        <div class="content">
+          <div class="center">
+            <div class="ui inverted button">Subscribe</div>
+          </div>
+        </div>
+      </div>
+      <img ng-src="{{program.imageUrl}}">
+    </div>
+    <div class="content">
+      <div class="header" ng-bind="program.name"></div>
+      <div class="description" ng-bind="program.description"></div>
+    </div>
+    <div class="extra content">
+      <span class="left floated">
+        <i class="calendar icon"></i>
+        {{program.duration}} weeks
+      </span>
+      <span class="right floated" ng-bind="program.price | currency:'₹'"></span>
+    </div>
+  </a>
+</div>
+
+<div class="ui tertiary inverted teal segment" data-ng-if="vm.programs.$resolved && !vm.programs.length">
+  <p class="ui text container">No Programs yet, why don't you <a data-ui-sref="programs.create">create one</a>?</p>
+</div>
+
+</div>
+
+<div class="program ui modal">
+  <div class="header">
+    Subscribe to {{vm.program.name}}
+  </div>
+  <div class="image content">
+    <div class="ui medium image">
+      <img ng-src="{{vm.program.imageUrl}}">
+    </div>
+    <div class="description">
+      <div class="ui header" ng-bind="vm.program.name">We've auto-chosen a profile image for you.</div>
+      <p ng-bind="vm.program.description"></p>
+      <span class="left floated">
+        <i class="calendar icon"></i>
+        {{vm.program.duration}} weeks
+      </span>
+      <span class="right floated" ng-bind="vm.program.price | currency:'₹'"></span>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui black deny button">
+      No
+    </div>
+    <div class="ui positive right labeled icon button">
+      Confirm
+      <i class="checkmark icon"></i>
+    </div>
+  </div>
+</div>

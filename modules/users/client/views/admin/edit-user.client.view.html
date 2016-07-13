@@ -28,6 +28,15 @@
             </div>
           </div>
         </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="roles">Programs</label>
+          <div class="controls">
+            <input class="form-control" type="text" name="roles" ng-model="user.programs" id="programs" ng-list />
+            <div ng-messages="userForm.roles.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">At least one role is required.</p>
+            </div>
+          </div>
+        </div>
         <div class="form-group">
           <input type="submit" value="Update" class="btn btn-default">
         </div>

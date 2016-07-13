@@ -1,0 +1,33 @@
+<div class = "ui container basic segment" ng-init="vm.initQuestionnaire()">
+  <div class ="ui huge header">User Information</div>
+  <div class="ui divider"></div>
+  <div class="ui grid basic segment">
+    <div class="ten wide column">
+      <form  name="vm.form.articleForm" class = "ui form" ng-submit="vm.save(vm.form.articleForm.$valid)">
+
+        <div class="ui segment" ng-repeat="section in vm.program.questionnaire track by $index">
+          <h3 class="ui header" ng-bind="section.name"></h3>
+          <div class="ui divider"></div>
+          <div class="ui basic segment" ng-repeat="question in section.questions track by $index">
+
+            <div class="field" ng-if="['text','number'].indexOf(question.type) != -1">
+              <label ng-bind="question.title"></label>
+              <input class="" type="{{question.type}}" ng-model="vm.answers[section.name][question.label || question.title]" placeholder="{{question.label}}"/>
+            </div>
+
+            <div class="field" ng-if="['textarea'].indexOf(question.type) != -1">
+              <label ng-bind="question.title"></label>
+              <textarea ng-model="vm.answers[section.name][question.label || question.title]"></textarea>
+            </div>
+
+          </div>
+        </div>
+
+        <button class = "ui green button" type="submit">Save</button>
+        <div class="ui error message" ng-show="vm.error">
+          <strong ng-bind="vm.error"></strong>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -9,7 +9,7 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
     // Get the topbar menu
     $scope.menu = Menus.getMenu('topbar');
 
-    $ = window.jQuery;
+    //$ = window.jQuery;
 
     // Toggle the menu items
     $scope.isCollapsed = false;

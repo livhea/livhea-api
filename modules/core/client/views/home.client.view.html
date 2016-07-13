@@ -1,21 +1,6 @@
 
-<section class="ui basic segment" ng-controller="HomeController">
-  <div class = "ui main text container">
-
-
-    <div class="ui link cards" >
-      <a class="fluid card" data-ng-repeat="article in articles"
-      data-ui-sref="articles.view({ articleId: article._id })">
-      <div class="image">
-        <img ng-src="{{article.featuredImage}}">
-      </div>
-      <div class="content">
-        <div class="header" ng-bind="article.title"></div>
-        <div class="description" ng-bind="article.excerpt"></div>
-      </div>
-      <div class="extra content">
-        <span class="right floated" ng-bind="article.createdAt | date: 'EEEE, dd MMM yyyy'"></span>
-      </div>
-    </a>
+<div class="ui main container basic segment" ng-controller="HomeController">
+  <div class = "ui basic segment">
+    <div class="ui active centered big text loader">Please Wait...</div>
   </div>
-</section>
+</div>

@@ -27,7 +27,14 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
         $scope.authentication.user = response;
 
         // And redirect to the previous or home page
-        $state.go($state.previous.state.name || 'home', $state.previous.params);
+        var state = 'dashboard.programs';
+        if(response.programs.length  > 0){
+          state = 'dashboard.myProgram';
+        }else{
+          state = 'dashboard.programs';
+        }
+
+        $state.go($state.previous.state.name || state, $state.previous.params);
       }).error(function (response) {
         $scope.error = response.message;
       });
@@ -47,7 +54,16 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
         $scope.authentication.user = response;
 
         // And redirect to the previous or home page
-        $state.go($state.previous.state.name || 'home', $state.previous.params);
+        // And redirect to the previous or home page
+        var state = 'dashboard.programs';
+        if(response.programs.length  > 0){
+          state = 'dashboard.myProgram';
+        }else{
+          state = 'dashboard.programs';
+        }
+        console.log($state.previous.state.name);
+
+        $state.go($state.previous.state.name || state, $state.previous.params);
       }).error(function (response) {
         $scope.error = response.message;
       });
