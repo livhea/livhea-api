@@ -11,7 +11,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
       $state.go('authentication.signin');
     }else{
       var state = 'dashboard.programs';
-      if($scope.authentication.user.length  > 0){
+      if($scope.authentication.user.length > 0){
         state = 'dashboard.myProgram';
       }else{
         state = 'dashboard.programs';
