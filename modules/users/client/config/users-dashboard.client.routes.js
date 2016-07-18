@@ -42,6 +42,16 @@ function ($stateProvider) {
       roles: ['user'],
       pageTitle: 'My LivHea'
     }
+  })
+  .state('dashboard.babyTracker', {
+    url: '/baby-tracker',
+    templateUrl: 'modules/users/client/views/dashboard/baby-tracker.client.view.html',
+    controller: 'DashboardController',
+    controllerAs: 'vm',
+    data: {
+      roles: ['user'],
+      pageTitle: 'Baby Tracker'
+    }
   });
 
 }]);

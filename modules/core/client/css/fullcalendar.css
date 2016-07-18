@@ -266,11 +266,11 @@ previous button's border...
 
 .fc .fc-button-group > * { /* extra precedence b/c buttons have margin set to zero */
 	float: left;
-	margin: 0 0 0 -1px;
+	/*margin: 0 0 0 -1px;*/
 }
 
 .fc .fc-button-group > :first-child { /* same */
-	margin-left: 0;
+	margin-left: inherit;
 }
 
 

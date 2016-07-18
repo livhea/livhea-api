@@ -17,6 +17,9 @@ module.exports = function(app) {
     .put(articles.update)
     .delete(articles.delete);
 
+  app.route('/api/week-by-week-baby-tracker')
+    .get(articles.babyTracker);
+
   // Finish by binding the Article middleware
   app.param('articleId', articles.articleByID);
 };

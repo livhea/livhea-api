@@ -13,7 +13,7 @@
       </div>
       <div class="content">
         <div class="header" ng-bind="article.title"></div>
-        <div class="description" ng-bind="article.excerpt"></div>
+        <div class="description" ng-bind-html="article.excerpt"></div>
       </div>
       <div class="extra content">
         <span class="right floated" ng-bind="article.createdAt | date: 'EEEE, dd MMM yyyy'"></span>

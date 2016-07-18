@@ -16,7 +16,7 @@
       </div>
       <div class = "field">
         <label>Tags</label>
-        <select class="ui fluid search dropdown" multiple="" name="tags" >
+        <select class="ui fluid search dropdown" multiple="" name="tags">
           <option value="">
             Tags
           </option>
@@ -27,6 +27,12 @@
             Weight Loss
           </option>
         </select>
+      </div>
+      <div class="field">
+        <label>Program</label>
+        <select class="ui fluid dropdown"
+          ng-options="program.name for program in vm.programs track by program._id"
+        ng-model="vm.article.program"></select>
       </div>
       <button class = "ui green button" type="submit">{{vm.article._id ? 'Update' : 'Create'}}</button>
       <div class="ui error message" ng-show="vm.error">

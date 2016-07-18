@@ -14,7 +14,7 @@ angular.module('users').run(['Menus',
 
     Menus.addMenuItem('topbar', {
       title: 'Week Wise Baby Tracker',
-      state: 'home',
+      state: 'dashboard.babyTracker',
       type: 'item',
       roles: ['user']
     });

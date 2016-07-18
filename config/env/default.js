@@ -36,5 +36,10 @@ module.exports = {
         fileSize: 1*1024*1024 // Max file size in bytes (1 MB)
       }
     }
+  },
+  flipkart:{
+    affiliate_id: 'rajanlivh',
+    affiliate_token: '66dd495d53464eb5b74eac2bcf3ab0d2',
+    responseType: 'json'
   }
 };

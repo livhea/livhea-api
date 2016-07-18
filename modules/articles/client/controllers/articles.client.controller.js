@@ -6,9 +6,9 @@
   .module('articles')
   .controller('ArticlesController', ArticlesController);
 
-  ArticlesController.$inject = ['$scope', '$state', 'Authentication', 'articleResolve'];
+  ArticlesController.$inject = ['$scope', '$state', 'Authentication', 'articleResolve', 'ProgramsService'];
 
-  function ArticlesController ($scope, $state, Authentication, article) {
+  function ArticlesController ($scope, $state, Authentication, article, ProgramsService) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -18,6 +18,7 @@
     vm.remove = remove;
     vm.save = save;
 
+    vm.programs = ProgramsService.query();
 
     // Remove existing Article
     function remove() {
@@ -28,7 +29,6 @@
 
     // Save Article
     function save(isValid) {
-      console.log(isValid);
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.articleForm');
         return false;
@@ -51,6 +51,5 @@
         vm.error = res.data.message;
       }
     }
-
   }
 })();

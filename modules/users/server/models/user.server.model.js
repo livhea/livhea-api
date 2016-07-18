@@ -99,6 +99,7 @@ var UserSchema = new Schema({
   * Assumption is this that A User will not have more than 3 programs in total,
   * but this design can scale well, unless hit by the hard limit of 16MB per document
   */
+  programData: {},
   programs: [{
     type: Schema.ObjectId,
     ref: 'Program'

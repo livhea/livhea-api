@@ -1,11 +1,12 @@
 <div class="ui main basic segment container" ng-init="vm.initMyProgram()">
   <div class="ui grid">
-    <div class="four wide column">
+    <div class="five wide column">
       <img ng-src="{{vm.program.imageUrl}}" class="ui medium bordered rounded image"/>
     </div>
-    <div class="twelve wide column">
+    <div class="eleven wide column">
       <h1 class="ui header" ng-bind="vm.program.name"></h1>
       <p ng-bind="vm.program.description"></p>
+      <a ui-sref="dashboard.questionnaire({programId: vm.program._id})" class="ui icon button"><i class="edit icon"></i>Edit your Information</a>
     </div>
   </div>
   <div class="ui divider"></div>
