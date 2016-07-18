@@ -36,16 +36,16 @@
 
       $('#calendar').find('button').each(function(idx, entry){
         if($(entry).hasClass('fc-prev-button')){
-          $(entry).removeClass().addClass("ui icon green button");
+          $(entry).removeClass().addClass('ui icon green button');
           $(entry).children().remove();
-          $(entry).append('<i class="caret left icon"></i>');
+          $(entry).append('<i class='caret left icon'></i>');
         }
         else if($(entry).hasClass('fc-next-button')){
-          $(entry).removeClass().addClass("ui icon green button");
+          $(entry).removeClass().addClass('ui icon green button');
           $(entry).children().remove();
-          $(entry).append('<i class="caret right icon"></i>');
+          $(entry).append('<i class='caret right icon'></i>');
         }else{
-          $(entry).removeClass().addClass("ui button").css('text-transform', 'capitalize');
+          $(entry).removeClass().addClass('ui button').css('text-transform', 'capitalize');
         }
       });
     }

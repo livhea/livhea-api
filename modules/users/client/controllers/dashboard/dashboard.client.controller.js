@@ -118,7 +118,7 @@
         });
       }
       vm.program.$promise.then(function(){
-        vm.babyTracker = ArticlesService.query({program: vm.program._id, sort: 'title'});
+        vm.babyTracker = ArticlesService.query({ program: vm.program._id, sort: 'title' });
       });
     }
 

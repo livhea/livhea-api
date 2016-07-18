@@ -86,9 +86,6 @@ exports.list = function(req, res) {
   var sort = req.query.sort || '-created';
   delete query.sort;
 
-
-  console.log(sort);
-
   Article.find(query).sort(sort).populate('user', 'displayName').exec(function(err, articles) {
     if (err) {
       return res.status(400).send({
