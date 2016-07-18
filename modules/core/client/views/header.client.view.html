@@ -1,38 +1,15 @@
-<!-- <div class="ui attached stackable menu">
-  <div class="ui container">
-    <a class="item">
-      <i class="home icon"></i> Home
-    </a>
-    <a class="item">
-      <i class="grid layout icon"></i> Browse
-    </a>
-    <a class="item">
-      <i class="mail icon"></i> Messages
-    </a>
-    <div class="ui simple dropdown item">
-      More
-      <i class="dropdown icon"></i>
-      <div class="menu">
-        <a class="item"><i class="edit icon"></i> Edit Profile</a>
-        <a class="item"><i class="globe icon"></i> Choose Language</a>
-        <a class="item"><i class="settings icon"></i> Account Settings</a>
-      </div>
-    </div>
-    <div class="right item">
-      <div class="ui input"><input type="text" placeholder="Search..."></div>
-    </div>
-  </div>
-</div> -->
+<div ng-controller="HeaderController">
 
-<!-- Sidebar Menu -->
-<div class="ui vertical inverted sidebar menu">
-  <div class="item">
-    <img class="ui image" src="modules/core/client/img/brand/logo.png" />
-  </div>
-  <div class="active teal item" ng-show="authentication.user">
-    Welcome  <span ng-bind="authentication.user.displayName"></span>!
-  </div>
-  <div ng-repeat="item in menu.items | orderBy: 'position'"
+
+  <!-- Sidebar Menu -->
+  <div class="ui vertical inverted sidebar menu" ng-if="authentication.user">
+    <div class="item">
+      <img class="ui image" src="modules/core/client/img/brand/logo.png" />
+    </div>
+    <div class="active teal item" ng-show="authentication.user">
+      Welcome  <span ng-bind="authentication.user.displayName"></span>!
+    </div>
+    <div ng-repeat="item in menu.items | orderBy: 'position'"
     ng-if="item.shouldRender(authentication.user) && item.type === 'dropdown'"
     ng-switch="item.type"
     ng-class="{ 'item': item.type !== 'dropdown', 'ui dropdown item': item.type === 'dropdown' }"
@@ -48,8 +25,8 @@
 
 
 
-<!-- Following Menu -->
-<div ng-controller="HeaderController" class="ui inverted vertical top-menu center aligned segment">
+<!-- TopBar Menu -->
+<div class="ui inverted vertical top-menu center aligned segment">
   <div class="ui container">
     <div class="ui large inverted secondary menu">
       <a class="toc item" ng-click="toggleCollapsibleMenu()">
@@ -59,18 +36,6 @@
         <img class="ui image" src="modules/core/client/img/brand/logo.png" />
       </a>
 
-      <!-- <div ng-repeat="item in menu.items | orderBy: 'position'"
-        ng-if="item.shouldRender(authentication.user);"
-        ng-switch="item.type"
-        ng-class="{ 'item': item.type !== 'dropdown', 'ui dropdown item': item.type === 'dropdown' }"
-        class="{{item.class}}">
-
-        <span ng-switch-when="dropdown">{{::item.title}}</span><i ng-switch-when="dropdown" class="dropdown icon"></i>
-        <div class="menu" ng-switch-when="dropdown">
-          <a ui-sref="{{subitem.state}}" ng-bind="subitem.title" ng-repeat="subitem in item.items | orderBy: 'position'" ng-if="subitem.shouldRender(authentication.user);" class="item"></a>
-        </div>
-      </div> -->
-
       <div class="right item" ng-hide="authentication.user">
         <a class="ui inverted button" ui-sref="authentication.signin">Sign In</a>
         <a class="ui inverted button" ui-sref="authentication.signup">Sign Up</a>
@@ -79,26 +44,15 @@
         <img class="ui avatar image" ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}">
         <span ng-bind="authentication.user.displayName"></span> <i class="dropdown icon"></i>
         <div class="menu">
-          <a ui-sref="settings.profile" class="item">
-            <i class="edit icon"></i>
-            Edit Profile
-          </a>
-          <a class="item" ui-sref="settings.picture"><i class="user icon"></i> Edit Profile Picture</a>
-          <a class="item" ng-show="authentication.user.provider === 'local'" ui-sref="settings.password">
-            <i class="configure icon"></i>
-            Change Password
-          </a>
-          <a class="item" ui-sref="settings.accounts">
-            <i class="users icon"></i>
-            Manage Social Accounts
-          </a>
           <div class="divider"></div>
-            <a class="item" href="/api/auth/signout" target="_self">
-              <i class="power icon"></i>
-              Signout
-            </a>
-          </div>
+          <a class="item" href="/api/auth/signout" target="_self">
+            <i class="power icon"></i>
+            Signout
+          </a>
+        </div>
       </div>
-      </div>
+    </div>
   </div>
+</div>
+
 </div>

@@ -1,4 +1,4 @@
-<section>
+<!-- <section>
   <div class="page-header">
     <h1>Calendar events</h1>
   </div>
@@ -19,4 +19,38 @@
   <div class="alert alert-warning text-center" data-ng-if="vm.calendarEvents.$resolved && !vm.calendarEvents.length">
     No Calendar events yet, why don't you <a data-ui-sref="calendarEvents.create">create one</a>?
   </div>
-</section>
+</section> -->
+
+<div class="ui container" ng-init="vm.render()">
+  <div class="ui centered grid">
+    <div class="twelve wide column">
+      <div id="calendar"></div>
+    </div>
+  </div>
+</div>
+
+<div class="calendar ui modal">
+  <div class="header">
+    Calendar
+  </div>
+  <div class="image content">
+    <div class="ui medium image">
+
+    </div>
+    <div class="description">
+      <form class="ui form">
+        <input type="text" />
+        <textarea></textarea>
+      </form>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui black deny button">
+      Cancel
+    </div>
+    <div class="ui positive right labeled icon button">
+      Save
+      <i class="checkmark icon"></i>
+    </div>
+  </div>
+</div>

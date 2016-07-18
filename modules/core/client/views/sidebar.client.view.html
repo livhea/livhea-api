@@ -1,37 +1,4 @@
-<!-- <div class="ui vertical inverted menu" >
-  <div class="item">
-    <img class="ui image" src="modules/core/client/img/brand/logo.png" />
-  </div>
-  <div class="item">
-    Welcome
-  </div>
-  <div class="item">
-    <a href="#">Consult Myra</a>
-  </div>
-  <div class="item">
-    <a href="#">Consult Myra</a>
-  </div>
-  <div class="item">
-    <a href="#">Consult Myra</a>
-  </div>
-  <div class="item">
-    <a href="#">Consult Myra</a>
-  </div>
-  <div class="item">
-    <a href="#">Consult Myra</a>
-  </div>
-  <div class="item">
-    <a href="#">Consult Myra</a>
-  </div>
-  <div class="item">
-    <a href="#">Consult Myra</a>
-  </div>
-  <div class="item">
-    <a href="#">Consult Myra</a>
-  </div>
-</div> -->
-
-<div class="ui vertical menu" ng-controller="HeaderController">
+<div class="ui vertical menu" ng-controller="HeaderController" ng-show="authentication.user">
   <div class="active teal item" ng-show="authentication.user">
     Welcome  <span ng-bind="authentication.user.displayName"></span>!
   </div>

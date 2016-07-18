@@ -81,7 +81,15 @@ exports.delete = function(req, res) {
  * List of Articles
  */
 exports.list = function(req, res) {
-  Article.find().sort('-created').populate('user', 'displayName').exec(function(err, articles) {
+
+  var query = req.query || {};
+  var sort = req.query.sort || '-created';
+  delete query.sort;
+
+
+  console.log(sort);
+
+  Article.find(query).sort(sort).populate('user', 'displayName').exec(function(err, articles) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -114,4 +122,12 @@ exports.articleByID = function(req, res, next, id) {
     req.article = article;
     next();
   });
+};
+
+/**
+* Temporary function to dump json data
+*/
+exports.babyTracker = function(req, res, next){
+  var data = require('../data/babyTracker.json');
+  res.send(data);
 };

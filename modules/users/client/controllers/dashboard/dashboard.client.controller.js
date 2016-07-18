@@ -6,9 +6,9 @@
   .module('users')
   .controller('DashboardController', DashboardController);
 
-  DashboardController.$inject = ['$scope', '$state', 'Authentication', 'ProgramsService', 'Users', '$timeout'];
+  DashboardController.$inject = ['$scope', '$state', 'Authentication', 'ProgramsService', 'Users', '$timeout', '$http', 'ArticlesService'];
 
-  function DashboardController ($scope, $state, Authentication, ProgramsService, Users, $timeout) {
+  function DashboardController ($scope, $state, Authentication, ProgramsService, Users, $timeout, $http, ArticlesService) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -21,7 +21,9 @@
     vm.initMyProgram = initMyProgram;
     vm.subscribeToProgram = subscribeToProgram;
     vm.addAnswersToProfile = addAnswersToProfile;
-    vm.answers = [];
+    vm.getBabyTracker = getBabyTracker;
+    vm.answers = {};
+    //vm.babyTracker = {};
 
     //Dashboard > Program List
     function initProgramList(){
@@ -51,6 +53,9 @@
           programId: $state.params.programId
         });
       }
+      vm.program.$promise.then(function(){
+        setupQuestionnaireForEdit();
+      });
     }
 
     //Dashboard > My Program
@@ -60,13 +65,11 @@
           programId: vm.user.programs[0]
         });
       }
-      console.log(vm.program);
     }
 
 
     //Dashboard > Selected Program > Subscribe Confirmation
     function subscribeToProgram(program){
-      console.log(program);
       vm.program = program;
       $('.program.ui.modal')
       .modal({
@@ -86,11 +89,37 @@
       });
     }
 
-    function addAnswersToProfile(){
+    function addAnswersToProfile(isValid){
+      if (!isValid) {
+        $scope.$broadcast('show-errors-check-validity', 'vm.form.questionnaire');
+        return false;
+      }
       vm.user = new Users(Authentication.user);
-      console.log(vm.user);
-      console.log(vm.answers);
+      if(!vm.user.hasOwnProperty('programData')){
+        vm.user.programData = {};
+      }
+      vm.user.programData[vm.program._id] = vm.answers;
+      vm.user.$update(function(response){
+        Authentication.user = response;
+        $state.go('dashboard.myProgram');
+      });
+    }
 
+    function setupQuestionnaireForEdit(){
+      if(vm.user.hasOwnProperty('programData')){
+        vm.answers = vm.user.programData[vm.program._id];
+      }
+    }
+
+    function getBabyTracker(){
+      if(!vm.program){
+        vm.program = ProgramsService.get({
+          programId: vm.user.programs[0]
+        });
+      }
+      vm.program.$promise.then(function(){
+        vm.babyTracker = ArticlesService.query({program: vm.program._id, sort: 'title'});
+      });
     }
 
   }

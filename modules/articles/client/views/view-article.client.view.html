@@ -29,5 +29,5 @@
       <small><span data-ng-bind="vm.article.createdAt | date:'EEE, dd MMM yyyy'"></span></small>
     </div>
     <div class="ui divider"></div>
-    <p data-ng-bind="vm.article.content"></p>
+    <p data-ng-bind-html="vm.article.content"></p>
   </section>

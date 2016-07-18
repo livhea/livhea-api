@@ -28,6 +28,11 @@ $ npm install -g bower
 $ npm install -g grunt-cli
 ```
 
+```bash
+$ cd public/lib/semantic/
+$ gulp build
+```
+
 * Sass - You're going to use [Sass](http://sass-lang.com/) to compile CSS during your grunt task. Make sure you have ruby installed, and then install Sass using gem install:
 
 ```bash

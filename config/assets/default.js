@@ -4,8 +4,7 @@ module.exports = {
   client: {
     lib: {
       css: [
-        'public/lib/semantic/dist/semantic.min.css',
-        'public/lib/fullcalendar/dist/fullcalendar.print.css'
+        'public/lib/semantic/dist/semantic.min.css'
       ],
       js: [
         'public/lib/jquery/dist/jquery.min.js',
@@ -17,6 +16,7 @@ module.exports = {
         'public/lib/angular-ui-router/release/angular-ui-router.js',
         'public/lib/angular-ui-utils/ui-utils.js',
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
+        'public/lib/angular-sanitize/angular-sanitize.js',
         'public/lib/angular-file-upload/angular-file-upload.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
         'public/lib/moment/min/moment-with-locales.min.js',

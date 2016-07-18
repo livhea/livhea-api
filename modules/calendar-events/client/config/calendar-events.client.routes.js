@@ -60,6 +60,15 @@
         data:{
           pageTitle: 'Calendar event {{ articleResolve.name }}'
         }
+      })
+      .state('milestones', {
+        url: '/milestones',
+        templateUrl: 'modules/calendar-events/client/views/list-calendar-events.client.view.html',
+        controller: 'CalendarEventsListController',
+        controllerAs: 'vm',
+        data: {
+          pageTitle: 'Calendar events List'
+        }
       });
   }
 
