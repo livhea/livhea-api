@@ -9,38 +9,47 @@ var acl = require('acl');
 acl = new acl(new acl.memoryBackend());
 
 /**
- * Invoke User groups Permissions
+ * Invoke Affiliate products Permissions
  */
 exports.invokeRolesPolicies = function () {
   acl.allow([{
-    roles: ['coach'],
+    roles: ['admin'],
     allows: [{
-      resources: '/api/user-groups',
+      resources: '/api/affiliate-products',
       permissions: '*'
     }, {
-      resources: '/api/user-groups/:userGroupId',
+      resources: '/api/affiliate-products/:affiliateProductId',
       permissions: '*'
     }]
   }, {
     roles: ['user'],
     allows: [{
-      resources: '/api/user-groups',
+      resources: '/api/affiliate-products',
       permissions: ['get', 'post']
     }, {
-      resources: '/api/user-groups/:userGroupId',
+      resources: '/api/affiliate-products/:affiliateProductId',
+      permissions: ['get']
+    }]
+  }, {
+    roles: ['guest'],
+    allows: [{
+      resources: '/api/affiliate-products',
+      permissions: ['get']
+    }, {
+      resources: '/api/affiliate-products/:affiliateProductId',
       permissions: ['get']
     }]
   }]);
 };
 
 /**
- * Check If User groups Policy Allows
+ * Check If Affiliate products Policy Allows
  */
 exports.isAllowed = function (req, res, next) {
   var roles = (req.user) ? req.user.roles : ['guest'];
 
-  // If an User group is being processed and the current user created it then allow any manipulation
-  if (req.userGroup && req.user && req.userGroup.user && req.userGroup.user.id === req.user.id) {
+  // If an Affiliate product is being processed and the current user created it then allow any manipulation
+  if (req.affiliateProduct && req.user && req.affiliateProduct.user && req.affiliateProduct.user.id === req.user.id) {
     return next();
   }
 

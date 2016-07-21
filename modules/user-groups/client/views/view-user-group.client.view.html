@@ -1,26 +1,44 @@
-<section>
-  <div class="page-header">
-    <h1 data-ng-bind="vm.userGroup.name"></h1>
-  </div>
-  <div class="pull-right"
-       data-ng-show="vm.userGroup.isCurrentUserOwner">
-    <a class="btn btn-primary"
+<div class="ui main container">
+  <div class="ui basic segment">
+    <h1 class="ui header">{{vm.userGroup.name}}</h1>
+    <a class="ui yellow icon button"
        data-ui-sref="userGroups.edit({ userGroupId: vm.userGroup._id })">
-      <i class="glyphicon glyphicon-edit"></i>
+      <i class="edit icon"></i>
     </a>
-    <a class="btn btn-primary" data-ng-click="vm.remove()">
-      <i class="glyphicon glyphicon-trash"></i>
+    <a class="ui red icon button" data-ng-click="vm.remove()">
+      <i class="remove icon"></i>
     </a>
+    <div class="ui divider"></div>
+
+    <div class="ui segment">
+      <h4 class="ui header">Users in group</h4>
+        <div class="ui small horizontal list">
+          <div class="item" ng-repeat="user in vm.userGroup.users">
+            <img class="ui avatar image" ng-src="{{user.profileImageURL}}">
+            <div class="content">
+              <div class="header">{{user.displayName}}</div>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="ui segment">
+      <div class="ui list">
+
+      </div>
+      <div class="ui divider"></div>
+      <form name="vm.form.userGroupForm" class="ui form" ng-submit="broadcastMessage()">
+        <div class="fields">
+          <div class="ten wide field">
+            <textarea ng-model="vm.message"></textarea>
+          </div>
+          <div class="six wide field">
+            <button type="submit" class="ui positive right labeled icon button"><i class="send icon"></i>Send</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
   </div>
-  <small>
-    <em class="text-muted">
-      Posted on
-      <span data-ng-bind="vm.userGroup.created | date:'mediumDate'"></span>
-      by
-      <span data-ng-if="vm.userGroup.user"
-            data-ng-bind="vm.userGroup.user.displayName"></span>
-      <span data-ng-if="!vm.userGroup.user">Deleted User</span>
-    </em>
-  </small>
-  <p class="lead" data-ng-bind="vm.userGroup.content"></p>
-</section>
+</div>

@@ -1,24 +1,32 @@
-<section>
-  <div class="page-header">
-    <h1>{{vm.user-group._id ? 'Edit User group' : 'New User group'}}</h1>
+
+<div class="ui main container">
+  <div class="ui basic segment">
+    <h1 class="ui header">{{vm.userGroup._id ? 'Edit User group' : 'New User group'}}</h1>
+    <div class="ui divider"></div>
+    <div class="ui grid segment">
+      <div class="ten wide column ">
+          <form name="vm.form.userGroupForm" class="ui form" ng-submit="vm.save(vm.form.userGroupForm.$valid)">
+            <div class="field">
+              <label>Name</label>
+              <input type="text" ng-model="vm.userGroup.name" id="name" placeholder="Enter name of your group"/>
+            </div>
+
+            <div class="field">
+              <label>Users</label>
+              <select class="ui fluid multiple search dropdown"
+                ng-model="vm.userGroup.users"
+                multiple=""
+                ng-options="user.displayName for user in vm.users track by user._id"
+                placeholder="Select users">
+              </select>
+            </div>
+
+            <div class="field">
+              <button type="submit" class="ui positive button">{{vm.userGroup._id ? 'Update' : 'Create'}}</button>
+            </div>
+
+          </form>
+      </div>
+    </div>
   </div>
-  <div class="col-md-12">
-    <form name="vm.form.user-groupForm" class="form-horizontal" ng-submit="vm.save(vm.form.user-groupForm.$valid)" novalidate>
-      <fieldset>
-        <div class="form-group" show-errors>
-          <label class="control-label" for="name">Name</label>
-          <input name="name" type="text" ng-model="vm.user-group.name" id="name" class="form-control" placeholder="Name" required>
-          <div ng-messages="vm.form.user-groupForm.name.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">User group name is required.</p>
-          </div>
-        </div>
-        <div class="form-group">
-          <button type="submit" class="btn btn-default">{{vm.user-group._id ? 'Update' : 'Create'}}</button>
-        </div>
-        <div ng-show="vm.error" class="text-danger">
-          <strong ng-bind="vm.error"></strong>
-        </div>
-      </fieldset>
-    </form>
-  </div>
-</section>
+</div>
