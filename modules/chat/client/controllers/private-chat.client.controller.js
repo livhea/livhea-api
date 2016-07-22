@@ -6,12 +6,16 @@
     .module('chat')
     .controller('PrivateChatController', PrivateChatController);
 
-  PrivateChatController.$inject = ['$scope', '$location', 'Authentication', 'Socket', '$state', 'ConversationsService'];
+  PrivateChatController.$inject = ['$scope', '$location', 'Authentication', 'Socket', '$state', 'ConversationsService', 'Users'];
 
-  function PrivateChatController($scope, $location, Authentication, Socket, $state, ConversationsService){
+  function PrivateChatController($scope, $location, Authentication, Socket, $state, ConversationsService, Users){
     var vm = this;
 
     var conversationId = $state.params.conversationId;
+
+    console.log(new Users(Authentication.user));
+
+
 
     vm.form = {};
     // If user is not signed in then redirect back home

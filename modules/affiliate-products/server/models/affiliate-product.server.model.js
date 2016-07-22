@@ -4,8 +4,8 @@
 * Module dependencies.
 */
 var mongoose = require('mongoose'),
-config = require('../../../../config/config'),
-Schema = mongoose.Schema;
+  config = require('../../../../config/config'),
+  Schema = mongoose.Schema;
 
 /**
 * Affiliate product Schema

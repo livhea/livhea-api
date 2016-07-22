@@ -27,7 +27,6 @@ exports.list = function (req, res) {
   var userGroupId = req.query.userGroupId;
 
   if(userGroupId){
-    console.log("UserGroupId recieved!");
     Message.find({ 'userGroupId': userGroupId }).sort('createdAt').exec(function(err, messages){
       if(err){
         console.log(err);
@@ -43,7 +42,6 @@ exports.list = function (req, res) {
       }
     });
   } else if(conversationId){
-    console.log("ConversationId recieved!");
     Message.find({ 'conversationId': conversationId }).sort('createdAt').exec(function(err, messages){
       if(err){
         console.log(err);
@@ -58,7 +56,6 @@ exports.list = function (req, res) {
       }
     });
   } else {
-    console.log("None recieved!");
     Message.aggregate([
       { $match: { $or: [ { toUser: req.user._id },{ fromUser: req.user._id } ], conversationId : { $ne: null } } },
       {
@@ -78,7 +75,6 @@ exports.list = function (req, res) {
         });
       }else{
         var User = mongoose.model('User');
-        console.log(JSON.stringify(conversations));
         User.populate(conversations, { path: 'fromUser' }, function(err, populated){
           if(err){
             console.log(err);
