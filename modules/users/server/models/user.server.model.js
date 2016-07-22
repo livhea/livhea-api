@@ -214,11 +214,11 @@ UserSchema.statics.generateRandomPassphrase = function () {
 };
 
 UserSchema.set('toJSON', {
-    transform: function(doc, ret, options) {
-        delete ret.password;
-        delete ret.salt;
-        return ret;
-    }
+  transform: function(doc, ret, options) {
+    delete ret.password;
+    delete ret.salt;
+    return ret;
+  }
 });
 
 mongoose.model('User', UserSchema);

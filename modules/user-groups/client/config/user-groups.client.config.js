@@ -13,21 +13,21 @@
       title: 'User Groups',
       state: 'userGroups',
       type: 'dropdown',
-      roles: ['coach']
+      roles: ['coach','admin']
     });
 
     // Add the dropdown list item
     Menus.addSubMenuItem('topbar', 'userGroups', {
       title: 'List User Groups',
       state: 'userGroups.list',
-      roles: ['coach']
+      roles: ['coach','admin']
     });
 
     // Add the dropdown create item
     Menus.addSubMenuItem('topbar', 'userGroups', {
       title: 'Create User Group',
       state: 'userGroups.create',
-      roles: ['coach']
+      roles: ['coach','admin']
     });
   }
 })();

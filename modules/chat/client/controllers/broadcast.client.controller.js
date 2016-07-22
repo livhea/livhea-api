@@ -4,14 +4,12 @@
 
   angular
     .module('chat')
-    .controller('PrivateChatController', PrivateChatController);
+    .controller('BroadcastController', BroadcastController);
 
-  PrivateChatController.$inject = ['$scope', '$location', 'Authentication', 'Socket', '$state', 'ConversationsService'];
+  BroadcastController.$inject = ['$scope', '$location', 'Authentication', 'Socket', '$state', 'ConversationsService'];
 
-  function PrivateChatController($scope, $location, Authentication, Socket, $state, ConversationsService){
+  function BroadcastController($scope, $location, Authentication, Socket, $state, ConversationsService){
     var vm = this;
-
-    var conversationId = $state.params.conversationId;
 
     vm.form = {};
     // If user is not signed in then redirect back home
@@ -24,13 +22,13 @@
       Socket.connect();
     }
 
-    Socket.emit('beginChat',{
-      conversationId: conversationId
+    Socket.emit('beginBroadcast',{
+      userGroupId: $state.params.userGroupId
     });
-    vm.messages = ConversationsService.query({ _id: conversationId });
+    vm.messages = ConversationsService.query({ userGroupId: $state.params.userGroupId });
 
     // Add an event listener to the 'chatMessage' event
-    Socket.on('communicate', function (message) {
+    Socket.on('broadcastMessage', function (message) {
       vm.messages.push(message);
     });
 
@@ -42,11 +40,11 @@
       var message = {
         text: vm.messageText,
         fromUser: Authentication.user._id,
-        conversationId: conversationId
+        userGroupId: $state.params.userGroupId
       };
 
       // Emit a 'chatMessage' message event
-      Socket.emit('communicate', message);
+      Socket.emit('broadcastMessage', message);
 
       // Clear the message text
       vm.messageText = '';
@@ -54,8 +52,8 @@
 
     // Remove the event listener when the controller instance is destroyed
     $scope.$on('$destroy', function () {
-      Socket.removeListener('communicate');
-      Socket.emit('endChat',{ conversationId: conversationId });
+      Socket.removeListener('broadcastMessage');
+      Socket.emit('endBroadcast',{ conversationId: $state.params.userGroupId });
     });
 
   }

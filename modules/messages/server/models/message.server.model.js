@@ -26,7 +26,11 @@ var MessageSchema = new Schema({
   },
   conversationId: {
     type: String,
-    default: ''
+    default: null
+  },
+  userGroupId:{
+    type: Schema.ObjectId,
+    ref: 'UserGroup'
   }
 },{
   timestamps: true

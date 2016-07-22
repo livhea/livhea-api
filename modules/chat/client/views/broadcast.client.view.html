@@ -1,0 +1,28 @@
+<div ng-controller="BroadcastController as vm">
+  <div class="ui comments" ng-if="vm.messages.length">
+    <div class="comment" ng-repeat="message in vm.messages">
+      <a class="avatar">
+        <img ng-src="{{message.fromUser.profileImageURL}}"/>
+      </a>
+      <div class="content">
+        <a class="author">{{message.fromUser.displayName}}</a>
+        <div class="metadata">
+          <div class="date" ng-bind="message.createdAt | date:'mediumTime'"></div>
+        </div>
+        <div class="text" ng-bind-html="message.text"></div>
+      </div>
+    </div>
+  </div>
+  <form name="vm.form.broadcastMessageForm" class="ui reply form" ng-submit="vm.communicate();">
+    <div class="field">
+      <textarea ng-model="vm.messageText"></textarea>
+    </div>
+    <div class="field" ng-if="vm.messageText.length">
+      <label>Preview</label>
+      <div ng-bind-html="vm.messageText"></div>
+    </div>
+    <button class="ui primary submit labeled icon button" type="submit" ng-disabled="!vm.messageText.length">
+      <i class="icon send"></i> Reply
+    </button>
+  </form>
+</div>

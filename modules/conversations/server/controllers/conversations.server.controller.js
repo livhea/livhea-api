@@ -22,16 +22,29 @@ exports.read = function (req, res) {
 */
 exports.list = function (req, res) {
 
+  //We expect either conversationId or userGroupId to be present
   var conversationId = req.query._id;
+  var userGroupId = req.query.userGroupId;
 
-  //TODO:Check if conversationId is recieved in query
-  //If yes, then return the list of messages for that conversation
-  //Else return the grouped list of conversations
-  //Ideally, the grouped list is only meant for 'coach' or 'admin' user
-  //For a normal 'user' it should only fetch a given conversation
-
-  if(conversationId){
-    Message.find({ 'conversationId': conversationId }).sort('-created').exec(function(err, messages){
+  if(userGroupId){
+    console.log("UserGroupId recieved!");
+    Message.find({ 'userGroupId': userGroupId }).sort('createdAt').exec(function(err, messages){
+      if(err){
+        console.log(err);
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      }else{
+        var User = mongoose.model('User');
+        User.populate(messages, { path: 'fromUser' }, function(err, populated){
+          res.json(populated);
+          return;
+        });
+      }
+    });
+  } else if(conversationId){
+    console.log("ConversationId recieved!");
+    Message.find({ 'conversationId': conversationId }).sort('createdAt').exec(function(err, messages){
       if(err){
         console.log(err);
         return res.status(400).send({
@@ -44,15 +57,16 @@ exports.list = function (req, res) {
         });
       }
     });
-  }else{
+  } else {
+    console.log("None recieved!");
     Message.aggregate([
-      { $match: { $or: [ { toUser: req.user._id },{ fromUser: req.user._id } ] } },
+      { $match: { $or: [ { toUser: req.user._id },{ fromUser: req.user._id } ], conversationId : { $ne: null } } },
       {
         $group: {
           _id: '$conversationId',
           messages: { $push : '$$ROOT' },
           fromUser: { '$first' : '$conversationId' },
-          created: { '$last': '$created' }
+          created: { '$last': '$createdAt' }
         }
       },
       { $sort: { '_id.created': -1 } }
@@ -64,7 +78,14 @@ exports.list = function (req, res) {
         });
       }else{
         var User = mongoose.model('User');
+        console.log(JSON.stringify(conversations));
         User.populate(conversations, { path: 'fromUser' }, function(err, populated){
+          if(err){
+            console.log(err);
+            return res.status(400).send({
+              message: errorHandler.getErrorMessage(err)
+            });
+          }
           res.json(populated);
         });
       }

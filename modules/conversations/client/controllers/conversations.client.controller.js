@@ -1,24 +1,15 @@
-'use strict';
+(function () {
+  'use strict';
 
-// conversations controller
-angular.module('conversations').controller('ConversationsController', ['$scope', '$stateParams', '$location', 'Authentication', 'conversations', 'Admin',
-  function ($scope, $stateParams, $location, Authentication, conversations, Admin) {
-    $scope.authentication = Authentication;
+  angular
+    .module('conversations')
+    .controller('ConversationsController', ConversationsController);
 
-    // Find a list of conversations
-    $scope.find = function () {
-      $scope.conversations = conversations.query();
-    };
+  ConversationsController.$inject = ['$scope', '$state', 'ConversationsService', 'Admin'];
 
-    // Find existing conversation
-    $scope.findOne = function () {
-      $scope.conversation = conversations.get({
-        conversationId: $stateParams.conversationId
-      });
-    };
-
-    $scope.listUsers = function() {
-      $scope.users = Admin.query();
-    };
+  function ConversationsController($scope, $state, ConversationsService, Admin) {
+    var vm = this;
+    vm.conversations = ConversationsService.query();
+    vm.users = Admin.query();
   }
-]);
+})();

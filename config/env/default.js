@@ -40,6 +40,7 @@ module.exports = {
   flipkart:{
     affiliate_id: 'rajanlivh',
     affiliate_token: '66dd495d53464eb5b74eac2bcf3ab0d2',
-    responseType: 'json'
+    responseType: 'json',
+    url_prop: 'affid'
   }
 };

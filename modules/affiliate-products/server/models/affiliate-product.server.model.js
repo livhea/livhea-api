@@ -1,19 +1,25 @@
 'use strict';
 
 /**
- * Module dependencies.
- */
+* Module dependencies.
+*/
 var mongoose = require('mongoose'),
-  Schema = mongoose.Schema;
+config = require('../../../../config/config'),
+Schema = mongoose.Schema;
 
 /**
- * Affiliate product Schema
- */
+* Affiliate product Schema
+*/
 var AffiliateProductSchema = new Schema({
   name: {
     type: String,
     default: '',
     required: 'Please fill Affiliate product name',
+    trim: true
+  },
+  description: {
+    type: String,
+    default: '',
     trim: true
   },
   imageUrl:{
@@ -38,14 +44,26 @@ var AffiliateProductSchema = new Schema({
   timestamps: true
 });
 
-// Getter
-AffiliateProductSchema.path('price').get(function(num) {
-  return (num / 100).toFixed(2);
-});
+// // Getter
+// AffiliateProductSchema.path('price').get(function(num) {
+//   return (num / 100).toFixed(2);
+// });
 
-// Setter
-AffiliateProductSchema.path('price').set(function(num) {
-  return num * 100;
+// // Setter
+// AffiliateProductSchema.path('price').set(function(num) {
+//   return num * 100;
+// });
+
+AffiliateProductSchema.set('toJSON', {
+  transform: function(doc, ret, options) {
+
+    if(ret.provider === 'flipkart'){
+      if(ret.url.indexOf(config.flipkart.url_prop) === -1){
+        ret.url += '&' + config.flipkart.url_prop + '=' + config.flipkart.affiliate_id;
+      }
+    }
+    return ret;
+  }
 });
 
 mongoose.model('AffiliateProduct', AffiliateProductSchema);

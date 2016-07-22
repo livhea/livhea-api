@@ -58,7 +58,7 @@ exports.isAllowed = function (req, res, next) {
   var roles = (req.user) ? req.user.roles : ['guest'];
 
   // If an conversation is being processed and the current user created it then allow any manipulation
-  if (req.conversation && req.user && req.conversation.user.id === req.user.id) {
+  if (req.conversation && req.user && req.conversation.fromUser.id === req.user.id) {
     return next();
   }
 

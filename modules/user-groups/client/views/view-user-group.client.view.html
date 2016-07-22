@@ -10,7 +10,7 @@
     </a>
     <div class="ui divider"></div>
 
-    <div class="ui segment">
+    <div class="ui raised segment">
       <h4 class="ui header">Users in group</h4>
         <div class="ui small horizontal list">
           <div class="item" ng-repeat="user in vm.userGroup.users">
@@ -22,23 +22,9 @@
       </div>
     </div>
 
-    <div class="ui segment">
-      <div class="ui list">
+    <div class="ui divider"></div>
 
-      </div>
-      <div class="ui divider"></div>
-      <form name="vm.form.userGroupForm" class="ui form" ng-submit="broadcastMessage()">
-        <div class="fields">
-          <div class="ten wide field">
-            <textarea ng-model="vm.message"></textarea>
-          </div>
-          <div class="six wide field">
-            <button type="submit" class="ui positive right labeled icon button"><i class="send icon"></i>Send</button>
-          </div>
-        </div>
-
-      </form>
-    </div>
+    <ng-include src="'./modules/chat/client/views/broadcast.client.view.html'"></ng-include>
 
   </div>
 </div>

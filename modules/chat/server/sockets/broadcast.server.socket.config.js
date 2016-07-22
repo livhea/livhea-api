@@ -5,39 +5,38 @@ var Message = mongoose.model('Message');
 // Create the chat configuration
 module.exports = function (io, socket) {
 
-  socket.on('beginChat', function(message){
+  socket.on('beginBroadcast', function(message){
 
-    console.log(socket.request.user.displayName + ' Joined - ' + message.conversationId);
-    socket.join(message.conversationId);
+    console.log(socket.request.user.displayName + ' Joined - ' + message.userGroupId);
+    socket.join(message.userGroupId);
     //TODO, fetch all messages
   });
 
-  socket.on('endChat', function(message){
-    console.log(socket.request.user.displayName + ' Left - ' + message.conversationId);
-    socket.leave(message.conversationId);
+  socket.on('endBroadcast', function(message){
+    console.log(socket.request.user.displayName + ' Left - ' + message.userGroupId);
+    socket.leave(message.userGroupId);
   });
 
-  socket.on('communicate', function(message){
+  socket.on('broadcastMessage', function(message){
 
     var now = Date.now();
     var _message = new Message({
       text: message.text,
       fromUser: message.fromUser,
       toUser: message.toUser,
-      conversationId: message.conversationId
+      userGroupId: message.userGroupId
     });
 
     _message.save(function(err){
       if(err) console.error(err);
       else{
         var messageJSON = JSON.parse(JSON.stringify(_message));
-        messageJSON.type = 'message';
         messageJSON.fromUser = {
           profileImageURL: socket.request.user.profileImageURL,
           username: socket.request.user.username,
           displayName: socket.request.user.displayName
         };
-        io.to(message.conversationId).emit('communicate',messageJSON);
+        io.to(message.userGroupId).emit('broadcastMessage',messageJSON);
       }
     });
   });

@@ -1,8 +1,13 @@
-'use strict';
+(function () {
+  'use strict';
 
-// Configuring the conversations module
-angular.module('conversations').run(['Menus',
-  function (Menus) {
+  angular
+    .module('conversations')
+    .run(menuConfig);
+
+  menuConfig.$inject = ['Menus'];
+
+  function menuConfig(Menus) {
     // Add the conversations dropdown item
     Menus.addMenuItem('topbar', {
       title: 'Conversations',
@@ -23,4 +28,4 @@ angular.module('conversations').run(['Menus',
     });
 
   }
-]);
+})();

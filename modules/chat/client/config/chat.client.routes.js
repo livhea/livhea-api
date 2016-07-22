@@ -1,22 +1,23 @@
-'use strict';
+(function(){
 
-// Configure the 'chat' module routes
-angular.module('chat').config(['$stateProvider',
-  function ($stateProvider) {
+  'use strict';
+
+  angular
+  .module('chat')
+  .config(routeConfig);
+
+  routeConfig.$inject = ['$stateProvider'];
+
+  function routeConfig($stateProvider){
     $stateProvider
-      .state('chat', {
-        url: '/chat',
-        templateUrl: 'modules/chat/client/views/chat.client.view.html',
-        data: {
-          roles: ['user','coach','admin']
-        }
-      })
-      .state('privateChat', {
-        url: '/chat/:conversationId',
-        templateUrl: 'modules/chat/client/views/private-chat.client.view.html',
-        data: {
-          roles: ['user','coach','admin']
-        }
-      });
+    .state('privateChat', {
+      url: '/consult-myra/:conversationId',
+      templateUrl: 'modules/chat/client/views/private-chat.client.view.html',
+      controller: 'PrivateChatController',
+      controllerAs: 'vm',
+      data: {
+        roles: ['user','coach','admin']
+      }
+    });
   }
-]);
+})();

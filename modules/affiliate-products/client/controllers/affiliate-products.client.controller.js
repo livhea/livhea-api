@@ -3,8 +3,8 @@
 
   // Affiliate products controller
   angular
-    .module('affiliateProducts')
-    .controller('AffiliateProductsController', AffiliateProductsController);
+  .module('affiliateProducts')
+  .controller('AffiliateProductsController', AffiliateProductsController);
 
   AffiliateProductsController.$inject = ['$scope', '$state', 'Authentication', 'affiliateProductResolve'];
 
@@ -17,6 +17,12 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
+
+    //TODO: Refactor this, move provider to a different module
+
+    if(!vm.affiliateProduct.provider){
+      vm.affiliateProduct.provider = 'flipkart';
+    }
 
     // Remove existing Affiliate product
     function remove() {
@@ -40,9 +46,7 @@
       }
 
       function successCallback(res) {
-        $state.go('affiliateProducts.view', {
-          affiliateProductId: res._id
-        });
+        $state.go('affiliateProducts.list');
       }
 
       function errorCallback(res) {

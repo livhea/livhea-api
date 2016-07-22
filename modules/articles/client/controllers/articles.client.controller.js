@@ -6,9 +6,9 @@
   .module('articles')
   .controller('ArticlesController', ArticlesController);
 
-  ArticlesController.$inject = ['$scope', '$state', 'Authentication', 'articleResolve', 'ProgramsService'];
+  ArticlesController.$inject = ['$scope', '$state', 'Authentication', 'articleResolve', 'ProgramsService', '$timeout'];
 
-  function ArticlesController ($scope, $state, Authentication, article, ProgramsService) {
+  function ArticlesController ($scope, $state, Authentication, article, ProgramsService, $timeout) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -19,6 +19,12 @@
     vm.save = save;
 
     vm.programs = ProgramsService.query();
+    vm.programs.$promise.then(function(){
+      $('.dropdown').dropdown();
+      $timeout(function(){
+        $('.ui.fluid.dropdown').dropdown('set selected', vm.article.program);
+      },1);
+    });
 
     // Remove existing Article
     function remove() {
