@@ -1,22 +1,26 @@
-<section>
-  <div class="page-header">
-    <h1>User groups</h1>
+<div class="ui main container">
+  <div class="ui basic segment">
+    <h1 class="ui header">User Groups</h1>
+    <div class="ui divider"></div>
+    <div class="ui grid">
+      <div class="sixteen wide column">
+        <div class="ui middle aligned selection celled list" ng-if="vm.userGroups.$resolved && vm.userGroups.length">
+          <a class="item" ng-repeat="userGroup in vm.userGroups"
+            ui-sref="userGroups.view({ userGroupId: userGroup._id })">
+            <div class="content">
+              <div class="header">
+                <h3 class="ui header">{{userGroup.name}}</h3>
+              </div>
+              <div class="description">
+                <img class="ui avatar image" data-content="{{user.displayName}}" ng-src="{{user.profileImageURL}}" ng-repeat="user in userGroup.users"/>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="ui tertiary inverted teal segment" data-ng-if="vm.userGroups.$resolved && !vm.userGroups.length">
+          <p class="ui text container">No User Groups yet, why don't you <a data-ui-sref="userGroups.create">create one</a>?</p>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="list-group">
-    <a data-ng-repeat="user-group in vm.userGroups"
-       data-ui-sref="userGroups.view({ user-groupId: user-group._id })"
-       class="list-group-item">
-      <small class="list-group-item-text">
-        Posted on
-        <span data-ng-bind="userGroup.created | date:'mediumDate'"></span>
-        by
-        <span data-ng-if="userGroup.user" data-ng-bind="userGroup.user.displayName"></span>
-        <span data-ng-if="!userGroup.user">Deleted User</span>
-      </small>
-      <h4 class="list-group-item-heading" data-ng-bind="user-group.name"></h4>
-    </a>
-  </div>
-  <div class="alert alert-warning text-center" data-ng-if="vm.userGroups.$resolved && !vm.userGroups.length">
-    No User groups yet, why don't you <a data-ui-sref="userGroups.create">create one</a>?
-  </div>
-</section>
+</div>

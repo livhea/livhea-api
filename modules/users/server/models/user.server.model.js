@@ -105,6 +105,19 @@ var UserSchema = new Schema({
     ref: 'Program'
   }]
 },{
+  toObject: {
+    virtuals: true,
+    getters: true
+  },
+  toJSON: {
+    transform: function(doc, ret, options) {
+      delete ret.password;
+      delete ret.salt;
+      return ret;
+    },
+    virtuals: true,
+    getters: true
+  },
   timestamps: true
 });
 
@@ -135,6 +148,20 @@ UserSchema.pre('validate', function (next) {
   }
 
   next();
+});
+
+
+UserSchema.virtual('groups').get(function(){
+  var UserGroup = mongoose.model('UserGroup');
+  UserGroup.find({users: {$elemMatch : {$eq: this._id}}}).exec(function(err, groups){
+    if(err){
+      console.log(err);
+      return;
+    }
+    return groups.map(function(obj){
+      return obj._id;
+    });
+  });
 });
 
 /**

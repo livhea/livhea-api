@@ -80,8 +80,8 @@ exports.delete = function(req, res) {
 /**
  * List of User groups
  */
-exports.list = function(req, res) { 
-  UserGroup.find().sort('-created').populate('user', 'displayName').exec(function(err, userGroups) {
+exports.list = function(req, res) {
+  UserGroup.find().sort('-created').populate('users').exec(function(err, userGroups) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -103,7 +103,7 @@ exports.userGroupByID = function(req, res, next, id) {
     });
   }
 
-  UserGroup.findById(id).populate('user', 'displayName').exec(function (err, userGroup) {
+  UserGroup.findById(id).populate('users').exec(function (err, userGroup) {
     if (err) {
       return next(err);
     } else if (!userGroup) {

@@ -24,26 +24,21 @@ module.exports = function (io, socket) {
       text: message.text,
       fromUser: message.fromUser,
       toUser: message.toUser,
-      created: now,
       conversationId: message.conversationId
     });
 
     _message.save(function(err){
       if(err) console.error(err);
+      else{
+        var messageJSON = JSON.parse(JSON.stringify(_message));
+        messageJSON.type = 'message';
+        messageJSON.fromUser = {
+          profileImageURL: socket.request.user.profileImageURL,
+          username: socket.request.user.username,
+          displayName: socket.request.user.displayName
+        };
+        io.to(message.conversationId).emit('communicate',messageJSON);
+      }
     });
-
-    message.type = 'message';
-    message.created = now;
-    message.fromUser = {
-      profileImageURL: socket.request.user.profileImageURL,
-      username: socket.request.user.username,
-      displayName: socket.request.user.displayName
-    };
-
-    io.to(message.conversationId).emit('communicate',message);
-
   });
-
-
-
 };

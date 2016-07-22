@@ -1,5 +1,5 @@
-<section class="ui basic segment">
-  <div class = "ui main text container">
+<div class="ui main container">
+  <div class = "ui basic segment">
 
     <h1 class="ui header">Articles</h1>
     <div class="ui divider"></div>
@@ -9,7 +9,7 @@
       <a class="fluid card" data-ng-repeat="article in vm.articles"
       data-ui-sref="articles.view({ articleId: article._id })">
       <div class="image">
-        <img ng-src="{{article.featuredImage}}">
+        <img ng-src="{{article.featuredImage}}" />
       </div>
       <div class="content">
         <div class="header" ng-bind="article.title"></div>
@@ -23,7 +23,5 @@
   <div class="ui tertiary inverted teal segment" data-ng-if="vm.articles.$resolved && !vm.articles.length">
     <p class="ui text container">No Articles yet, why don't you <a data-ui-sref="articles.create">create one</a>?</p>
   </div>
-
 </div>
-
-</section>
+</div>

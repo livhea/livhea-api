@@ -1,0 +1,61 @@
+<div class="ui main container">
+  <div class="ui basic segment">
+    <h1 class="ui header">{{vm.affiliateProduct._id ? 'Edit Affiliate Product' : 'New Affiliate Product'}}</h1>
+    <div class="ui divider"></div>
+    <div class="ui grid segment">
+      <div class="ten wide column ">
+          <form name="vm.form.affiliateProductForm" class="ui form" ng-submit="vm.save(vm.form.affiliateProductForm.$valid)">
+            <div class="field required">
+              <label>Name</label>
+              <input type="text" ng-model="vm.affiliateProduct.name" id="name" placeholder="Enter name of Product"/>
+            </div>
+            <div class="field">
+              <label>Description</label>
+              <textarea ng-model="vm.affiliateProduct.description"></textarea>
+            </div>
+            <div class="field required">
+              <label>Image URL</label>
+              <input type="text" ng-model="vm.affiliateProduct.imageUrl" id="imageUrl" placeholder="Enter Image URL of Product"/>
+            </div>
+            <div class="field required">
+              <label>Affiliate URL</label>
+              <input type="text" ng-model="vm.affiliateProduct.url" id="url" placeholder="Enter Product URL"/>
+            </div>
+            <div class="field required">
+              <label>Price</label>
+              <input type="number" ng-model="vm.affiliateProduct.price" id="price" placeholder="Enter Price"/>
+            </div>
+            <div class="field required">
+              <label>Provider</label>
+              <input type="text" ng-model="vm.affiliateProduct.provider" id="provider" readonly placeholder="Affiliate Provider" value="flipkart"/>
+            </div>
+
+            <div class="field">
+              <button type="submit" class="ui positive button">{{vm.affiliateProduct._id ? 'Update' : 'Create'}}</button>
+            </div>
+          </form>
+      </div>
+      <div class="six wide column">
+        <label>Preview</label>
+        <div class="ui fluid card">
+          <div class="image">
+            <img ng-src="{{vm.affiliateProduct.imageUrl}}" />
+          </div>
+          <div class="content">
+            <div class="header" ng-bind="vm.affiliateProduct.name"></div>
+            <div class="description" ng-bind="vm.affiliateProduct.description"></div>
+          </div>
+          <div class="extra content">
+            <span class="right floated" ng-bind="vm.affiliateProduct.price | currency:'₹'"></span>
+          </div>
+          <div class="ui bottom  white attached button">
+            <a class="external ui positive button">
+              <i class="shopping basket icon"></i>
+              Buy Now
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

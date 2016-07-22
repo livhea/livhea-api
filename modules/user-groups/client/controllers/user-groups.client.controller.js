@@ -6,9 +6,9 @@
     .module('userGroups')
     .controller('UserGroupsController', UserGroupsController);
 
-  UserGroupsController.$inject = ['$scope', '$state', 'Authentication', 'userGroupResolve'];
+  UserGroupsController.$inject = ['$scope', '$state', 'Authentication', 'userGroupResolve', 'Users', '$timeout'];
 
-  function UserGroupsController ($scope, $state, Authentication, userGroup) {
+  function UserGroupsController ($scope, $state, Authentication, userGroup, Users, $timeout) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -17,6 +17,19 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
+
+    vm.users = Users.query();
+    vm.users.$promise.then(function(response){
+      var users = [];
+      vm.userGroup.users.forEach(function(obj){
+        users.push(obj._id);
+      });
+      vm.userGroup.$promise.then(function(){
+        $timeout(function(){
+          $('.ui.fluid.multiple.search.dropdown').dropdown('set selected',users);
+        },1);
+      });
+    });
 
     // Remove existing User group
     function remove() {
@@ -40,7 +53,7 @@
       }
 
       function successCallback(res) {
-        $state.go('user-groups.view', {
+        $state.go('userGroups.view', {
           userGroupId: res._id
         });
       }

@@ -1,0 +1,51 @@
+<div class="ui main container">
+  <div class="ui basic segment">
+    <h1 class="ui header">The Buying Therapy <i class="ui smile icon"></i></h1>
+    <div class="ui divider"></div>
+
+    <div class="ui link cards" data-ng-if="vm.affiliateProducts.length">
+      <div class="fluid card" data-ng-repeat="affiliateProduct in vm.affiliateProducts">
+        <div class="image">
+          <img ng-src="{{affiliateProduct.imageUrl}}" />
+        </div>
+        <div class="content">
+          <div class="header" ng-bind="affiliateProduct.name"></div>
+          <div class="description" ng-bind="affiliateProduct.description"></div>
+        </div>
+        <div class="extra content">
+          <span class="right floated" ng-bind="affiliateProduct.price | currency:'₹'"></span>
+        </div>
+        <div class="ui bottom  white attached button">
+          <a ng-if="affiliateProduct.isCurrentUserOwner" class="ui icon yellow button" ui-sref="affiliateProducts.edit({ affiliateProductId: affiliateProduct._id })"><i class="edit icon"></i></a>
+          <a ng-href="{{affiliateProduct.url}}" class="external ui positive button" ng-click="vm.click($event)">
+            <i class="shopping basket icon"></i>
+            Buy Now
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="ui tertiary inverted teal segment" data-ng-if="vm.affiliateProducts.$resolved && !vm.affiliateProducts.length">
+      <p class="ui text container">No Products yet, why don't you <a data-ui-sref="affiliateProducts.create">create one</a>?</p>
+    </div>
+  </div>
+</div>
+
+<div class="ui small basic modal">
+  <div class="ui icon header">
+    <i class="external square icon"></i>
+    Redirect to affiliate partner website
+  </div>
+  <div class="content">
+    <p>You will now be redirected to our affiliate partner's website. Click 'Confirm' to continue or 'Cancel' to go back.</p>
+  </div>
+  <div class="actions">
+    <div class="ui cancel red basic inverted button">
+      <i class="remove icon"></i>
+      Cancel
+    </div>
+    <div class="ui ok green basic inverted button">
+      <i class="checkmark icon"></i>
+      Confirm
+    </div>
+  </div>
+</div>

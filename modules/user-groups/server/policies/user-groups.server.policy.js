@@ -13,7 +13,7 @@ acl = new acl(new acl.memoryBackend());
  */
 exports.invokeRolesPolicies = function () {
   acl.allow([{
-    roles: ['admin'],
+    roles: ['coach'],
     allows: [{
       resources: '/api/user-groups',
       permissions: '*'
@@ -26,15 +26,6 @@ exports.invokeRolesPolicies = function () {
     allows: [{
       resources: '/api/user-groups',
       permissions: ['get', 'post']
-    }, {
-      resources: '/api/user-groups/:userGroupId',
-      permissions: ['get']
-    }]
-  }, {
-    roles: ['guest'],
-    allows: [{
-      resources: '/api/user-groups',
-      permissions: ['get']
     }, {
       resources: '/api/user-groups/:userGroupId',
       permissions: ['get']

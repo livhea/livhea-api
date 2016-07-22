@@ -1,23 +1,25 @@
-<section ng-controller="ConversationsController" ng-init="find()">
-  <div class="page-header">
-    <h1>Conversations</h1>
-  </div>
-  <div class="list-group">
-    <a ng-repeat="conversation in conversations" ui-sref="privateChat({conversationId: conversation._id})" class="list-group-item">
-
-      <img ng-src="{{conversation.fromUser.profileImageURL}}" alt="{{conversation.fromUser.username}}" class="pull-left chat-profile-image" />
-      <div class="pull-left chat-message-details" style="margin: 0.5rem !important">
-        <strong ng-bind="conversation.fromUser.displayName"></strong>
+<div class="ui main container">
+  <div class="ui basic segment">
+    <h1 class="ui header">Conversations</h1>
+    <div class="ui divider"></div>
+    <div class="ui grid">
+      <div class="sixteen wide column">
+        <div class="ui middle aligned selection relaxed divided list" ng-if="vm.conversations.$resolved && vm.conversations.length">
+          <a class="item" ng-repeat="conversation in vm.conversations"
+            ui-sref="privateChat({conversationId: conversation._id})">
+            <img class="ui avatar image"
+              ng-src="{{conversation.fromUser.profileImageURL}}"
+              data-content="{{conversation.fromUser.displayName}}"/>
+            <div class="content">
+              <div class="header">{{conversation.fromUser.displayName}}</div>
+              Last message at <span ng-bind="conversation.created | date:'mediumDate'"></span>
+            </div>
+          </a>
+        </div>
+        <div class="ui tertiary inverted teal segment" data-ng-if="vm.conversations.$resolved && !vm.conversations.length">
+          <p class="ui text container">No conversations yet</p>
+        </div>
       </div>
-      <br/>
-      <br/>
-      <small class="list-group-item-text">
-        Last message at
-        <span ng-bind="conversation.created | date:'mediumDate'"></span>
-      </small>
-    </a>
+    </div>
   </div>
-  <div class="alert alert-warning text-center" ng-if="conversations.$resolved && !conversations.length">
-    No conversations yet!
-  </div>
-</section>
+</div>

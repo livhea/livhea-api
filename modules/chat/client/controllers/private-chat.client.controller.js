@@ -1,59 +1,66 @@
-'use strict';
+(function(){
 
-// Create the 'chat' controller
-angular.module('chat').controller('PrivateChatController', ['$scope', '$location', 'Authentication', 'Socket', '$state', 'conversations',
-function ($scope, $location, Authentication, Socket, $state, conversations) {
-  // Create a messages array
-  $scope.messages = [];
-  $scope.conversationId = undefined;
+  'use strict';
 
-  // If user is not signed in then redirect back home
-  if (!Authentication.user) {
-    $location.path('/');
-  }
+  angular
+    .module('chat')
+    .controller('PrivateChatController', PrivateChatController);
 
-  // Make sure the Socket is connected
-  if (!Socket.socket) {
-    Socket.connect();
-  }
+  PrivateChatController.$inject = ['$scope', '$location', 'Authentication', 'Socket', '$state', 'ConversationsService', 'Users'];
 
-  var init = function(){
-    console.log('communicate init');
-    $scope.conversationId = $state.params.conversationId || Authentication.user._id;
+  function PrivateChatController($scope, $location, Authentication, Socket, $state, ConversationsService, Users){
+    var vm = this;
+
+    var conversationId = $state.params.conversationId;
+
+    console.log(new Users(Authentication.user));
+
+
+
+    vm.form = {};
+    // If user is not signed in then redirect back home
+    if (!Authentication.user) {
+      $location.path('/');
+    }
+
+    // Make sure the Socket is connected
+    if (!Socket.socket) {
+      Socket.connect();
+    }
+
     Socket.emit('beginChat',{
-      conversationId: $scope.conversationId
+      conversationId: conversationId
     });
-    $scope.messages = conversations.query({ _id: $scope.conversationId });
-  };
+    vm.messages = ConversationsService.query({ _id: conversationId });
 
+    // Add an event listener to the 'chatMessage' event
+    Socket.on('communicate', function (message) {
+      vm.messages.push(message);
+    });
 
-  // Add an event listener to the 'chatMessage' event
-  Socket.on('communicate', function (message) {
-    $scope.messages.unshift(message);
-  });
+    // Create a controller method for sending messages
+    vm.communicate = communicate;
 
-  // Create a controller method for sending messages
-  $scope.communicate = function () {
-    // Create a new message object
-    var message = {
-      text: this.messageText,
-      fromUser: Authentication.user._id,
-      conversationId: $scope.conversationId
-    };
+    function communicate() {
+      // Create a new message object
+      var message = {
+        text: vm.messageText,
+        fromUser: Authentication.user._id,
+        conversationId: conversationId
+      };
 
-    // Emit a 'chatMessage' message event
-    Socket.emit('communicate', message);
+      // Emit a 'chatMessage' message event
+      Socket.emit('communicate', message);
 
-    // Clear the message text
-    this.messageText = '';
-  };
+      // Clear the message text
+      vm.messageText = '';
+    }
 
-  // Remove the event listener when the controller instance is destroyed
-  $scope.$on('$destroy', function () {
-    Socket.removeListener('communicate');
-    Socket.emit('endChat',{ conversationId: $scope.conversationId });
-  });
+    // Remove the event listener when the controller instance is destroyed
+    $scope.$on('$destroy', function () {
+      Socket.removeListener('communicate');
+      Socket.emit('endChat',{ conversationId: conversationId });
+    });
 
-  init();
-}
-]);
+  }
+})();
