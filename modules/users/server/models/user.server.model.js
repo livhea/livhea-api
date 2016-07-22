@@ -153,7 +153,7 @@ UserSchema.pre('validate', function (next) {
 
 UserSchema.virtual('groups').get(function(){
   var UserGroup = mongoose.model('UserGroup');
-  UserGroup.find({users: {$elemMatch : {$eq: this._id}}}).exec(function(err, groups){
+  UserGroup.find({ users: { $elemMatch : { $eq: this._id } } }).exec(function(err, groups){
     if(err){
       console.log(err);
       return;
